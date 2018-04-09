@@ -1,0 +1,47 @@
+
+CREATE DATABASE privacyDB;
+use privacyDB;
+
+CREATE TABLE User (idUser INT PRIMARY KEY AUTO_INCREMENT, pseudo varchar(255), Telephone_Number varchar(255));
+
+CREATE TABLE Message(idMessage  INT PRIMARY KEY AUTO_INCREMENT, containte varchar(255), idUserSource int, idUserDestinatin int);
+
+INSERT INTO User (pseudo, Telephone_Number) VALUES ("toto", "07.77.37.72.83"); 
+
+INSERT INTO User (pseudo, Telephone_Number) VALUES ("bernard", "06.98.00.23.11");
+
+INSERT INTO User (pseudo, Telephone_Number) VALUES ("JP", "06.98.00.23.11" )
+
+INSERT INTO User (pseudo, Telephone_Number) VALUES ("koukoum", "06.98.00.23.11");
+
+INSERT INTO User (pseudo, Telephone_Number) VALUES ("linux", "06.98.00.23.11");
+
+INSERT INTO User (pseudo, Telephone_Number) VALUES ("serveur", "06.98.00.23.11");
+
+INSERT INTO User (pseudo, Telephone_Number) VALUES ("albert", "06.98.00.23.11");
+
+INSERT INTO User (pseudo, Telephone_Number) VALUES ("michel", "06.98.00.23.11");
+
+INSERT INTO User (pseudo, Telephone_Number) VALUES ( "nory", "06.98.00.23.11");
+
+---------------------------------------------------------------------------
+INSERT INTO Message ( containte , idUserSource , idUserDestinatin)
+VALUES ("Fusce luctus massa ac porta pharetra. Cras viverra libero eget porta interdum. Quisque a vestibulum lacus, sed consequat ipsum. Etiam pharetra urna vitae semper maximus. Donec vel arcu interdum, ultricies felis sed, finibus ligula. Pellentesque orci nulla, lacinia vel velit a, semper dapibus nulla. Donec vulputate nisi ligula, a sollicitudin lectus volutpat ac", 1, 2); 
+
+INSERT INTO Message ( containte , idUserSource , idUserDestinatin)
+VALUES ("Ut eleifend suscipit ornare. Cras sit amet libero nec mi laoreet condimentum. Sed sagittis urna mi, sit amet vehicula sapien ultricies vel. Cras leo velit, faucibus quis ultrices sed, ultricies a dui. Donec interdum laoreet sem, eu ultrices tellus laoreet at. Praesent suscipit nulla ut metus bibendum pellentesque. Vestibulum est risus, ultrices et consectetur at, interdum nec massa", 1, 2);
+
+INSERT INTO Message ( containte , idUserSource , idUserDestinatin)
+VALUES ("Fusce tempus dui non nunc malesuada elementum. Ut gravida, libero sed eleifend posuere, lorem sem vehicula lectus, ac dignissim turpis felis vitae sem. Sed nec metus condimentum, fermentum ipsum eleifend, dictum orci. Nullam et sapien at ligula maximus egestas ac in turpis. Pellentesque libero nunc, varius sit amet vestibulum in, congue ut erat. Duis hendrerit, ligula ut tincidunt consectetur, urna nulla luctus mauris,", 2,1);
+
+INSERT INTO Message ( containte , idUserSource , idUserDestinatin)
+VALUES ("Donec aliquam, erat eu bibendum tincidunt, dui turpis auctor erat, id dictum elit nisl nec mi. Nam in massa eget arcu rhoncus auctor ultrices quis turpis. Etiam magna massa, commodo sagittis tristique quis, volutpat sit amet ipsum. Morbi lacinia gravida cursus. Morbi quis massa nibh. Aliquam euismod consequat tellus, id semper nulla volutpat vitae. Pellentesque egestas sem justo, ac egestas magna tristique a. Fusce in massa mattis", 2 , 1);
+
+INSERT INTO Message ( containte , idUserSource , idUserDestinatin)
+VALUES ( "Nunc maximus nec enim nec mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis eget neque id lacus imperdiet fermentum. Nullam ac imperdiet augue. Duis ligula sapien, ultrices eu porttitor nec, rhoncus in eros. ", 1,3);
+
+INSERT INTO Message ( containte , idUserSource , idUserDestinatin)
+VALUES ("Nunc a luctus turpis, convallis dapibus nunc. In a volutpat turpis, non aliquet ipsum. Cras elementum mollis magna. Mauris lacinia, quam ut dapibus tincidunt, lorem nisl tristique purus, nec venenatis enim velit in leo.", 3,1);
+
+INSERT INTO Message ( containte , idUserSource , idUserDestinatin)
+VALUES ("Curabitur massa dui, iaculis rutrum nisi eu, blandit rutrum velit. Vivamus id sollicitudin nisi. In tristique quam vel semper sagittis. Pellentesque accumsan ipsum a porta semper. Phasellus varius orci sed malesuada consequat.", 3,1);
