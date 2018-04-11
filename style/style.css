@@ -1,0 +1,222 @@
+.index {	
+	background-image: url("/picture/background.jpeg"); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: black;
+    color: black;
+    font-family: Open Sans,sans-serif;
+    font-size: 16px;
+    margin: 0px;
+}
+
+div.relative {
+    height: 25px;
+}
+
+label {
+    color: green;
+}
+
+div.relative2 {
+	margin-top: 14px;
+	/*padding-left: 104px;
+	*/
+    margin-left: 3px;
+	width: 300px;
+   	height: 25px;
+}
+
+
+div.relative3 {
+	width: auto;
+	margin-top: 20px;
+	padding-left: 74px;
+	}
+label 
+{
+    float: left;
+}
+div.pepito {
+    font-family: Sans;
+    width: 500px;
+    border: 1px solid #666;
+    border-radius: 3px;
+    box-shadow: 0px 0px 15px;
+    padding:  15px ;
+    background-color: black;
+
+}
+.parentPepito
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100VH;
+    width: 100%;
+}
+
+.Message{
+    width: 100%;
+    display: flex;
+
+}
+
+.Phone_Number{
+    width: 100%;
+    display: flex;
+
+
+}
+
+.pepitoInput
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.inputSub {
+    color:green;
+    margin-left: 27px;
+}
+
+.navbarAdmin{
+     style="background-color: white;"
+}
+
+.user-menu {
+    background: #fff;
+    font-family: Open Sans;
+    top: 54px;
+    height: auto;
+    opacity: 0;
+    margin: 0;
+    padding: 5px 10px;
+    position: absolute;
+    width: 100%;
+    z-index: 999;
+    right: 0;
+    min-width: 150px;
+    transition: all .25s ease;
+}
+
+.headerAdmin {
+    background: white;
+    box-shadow: 0 5px 1px rgba(0,0,0,.15);
+    clear: both;
+    display: inline-block;
+    padding: 15px 20px 13px;
+    width: 100%;
+    height: 46px;
+    display: block;
+}
+
+.header-right {
+    float: left;
+    flex: 0 0 41.66667%;
+    position: relative;
+    
+    padding-left: 98%;
+
+    margin-top: -3px; 
+}
+
+.inputSend
+{
+    margin-left: 120px;
+}
+.profilAdmin
+{
+    float: right;
+    width: 32px;
+    border-radius: 50%;
+    max-width: 100%;
+}
+
+.logoutAdmin
+{
+    float: right;
+    width: 32px;
+    border-radius: 50%;
+    max-width: 100%;
+
+
+}
+table,
+td,
+tr {
+  border-collapse: collapse;
+}
+
+.colorArrayLeter1{
+    color : black;
+}
+
+a {
+    text-decoration: none;
+    outline: none !important;
+    transition: all .25s ease;
+}
+
+ .user-menu {
+    background: #fff;
+    font-family: Open Sans;
+    top: 54px;
+    height: auto;
+    opacity: 0;
+    margin: 0;
+    padding: 5px 10px;
+    position: absolute;
+    width: 100%;
+    z-index: 999;
+    right: 0;
+    min-width: 150px;
+    transition: all .25s ease;
+}
+
+.left-panel
+{
+    background: red;
+    display: table-cell;
+    height: 100%;
+    min-height: 100%;
+    vertical-align: top;
+    padding: 0 25px;
+}
+
+.barleft {
+    height: 100%;
+    background: #272c33;
+    border-radius: 0;
+    border: none;
+    margin: 0;
+    margin-bottom: 0px;
+    margin-bottom: 100px;
+    padding: 0;
+}
+
+.wrapper
+{   
+    
+}
+
+#sidebar {
+background-color: #272c33;
+}
+
+
+.sideHolder
+{
+    background-color: white;
+
+}
+
+.logoutAdmin
+{
+    margin-left: 99%;   
+}
+
+.sidebar-head
+{
+    background-color: white;
+}

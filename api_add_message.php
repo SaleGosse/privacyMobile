@@ -1,8 +1,3 @@
-
-
-
-
-
 <?php 
 	
 	include 'connectDB.php';
@@ -35,8 +30,6 @@
 		}
 		
 		$dataBase = null;   // Disconnect
-
-
 
 	}
 ?>
