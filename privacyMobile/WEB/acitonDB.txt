@@ -1,10 +1,16 @@
-
-CREATE DATABASE privacyDB;
-use privacyDB;
+create database new;
+use new;
 
 CREATE TABLE User (idUser INT PRIMARY KEY AUTO_INCREMENT, pseudo varchar(255), Telephone_Number varchar(255));
 
-CREATE TABLE Message(idMessage  INT PRIMARY KEY AUTO_INCREMENT, content text, idUserSource int, idUserDestinatin int);
+CREATE TABLE Message(idMessage  INT PRIMARY KEY AUTO_INCREMENT, message text, date varchar(256), idConversation int, iduser int , position int );
+
+CREATE TABLE Conversation(idConversation INT PRIMARY KEY AUTO_INCREMENT, nomConv varchar(256) ,date varchar(256));
+
+CREATE TABLE user_Conversation(idUser_Conv INT PRIMARY KEY AUTO_INCREMENT, idUser int ,idConversation int);
+
+CREATE TABLE Personnes(idPersonnes INT PRIMARY KEY AUTO_INCREMENT NOT NULL, nomPersonnes  Varchar (255), username  Varchar (255) NOT NULL, password     Varchar (255) NOT NULL, toke Varchar (255), idRole   Integer NOT NULL, Telephone_Number varchar(255));
+
 
 INSERT INTO User (pseudo, Telephone_Number) VALUES ("toto", "07.77.37.72.83"); 
 
@@ -25,23 +31,32 @@ INSERT INTO User (pseudo, Telephone_Number) VALUES ("michel", "06.98.00.23.11");
 INSERT INTO User (pseudo, Telephone_Number) VALUES ( "nory", "06.98.00.23.11");
 
 ---------------------------------------------------------------------------
-INSERT INTO Message ( content , idUserSource , idUserDestinatin)
-VALUES ("Fusce luctus massa ac porta pharetra. Cras viverra libero eget porta interdum. Quisque a vestibulum lacus, sed consequat ipsum.", 1, 2); 
 
-INSERT INTO Message ( content , idUserSource , idUserDestinatin)
-VALUES ("Ut eleifend suscipit ornare. Cras sit amet libero nec mi laoreet condimentum. Sed sagittis urna mi, sit amet vehicula sapien ultricies vel.", 1, 2);
+INSERT INTO Message ( message , date ,idConversation, iduser, position)
+VALUES ("Salut ! ", " 25/05/2018 10:00",1,1,1); 
 
-INSERT INTO Message ( content , idUserSource , idUserDestinatin)
-VALUES ("Fusce tempus dui non nunc malesuada elementum. Ut gravida, libero sed eleifend posuere, lorem sem vehicula lectus, ac dignissim turpis felis vitae sem. Sed nec metus condimentum, fermentum ipsum eleifend,", 2,1);
+INSERT INTO Message ( message , date ,idConversation, iduser, position)
+VALUES ("Salut ! Comment tu vas ?! ", "25/05/2018 10:01",1,2,2);
 
-INSERT INTO Message ( content , idUserSource , idUserDestinatin)
-VALUES ("Donec aliquam, erat eu bibendum tincidunt", 2 , 1);
+INSERT INTO Message ( message , date ,idConversation, iduser, position)
+VALUES ("Ca va ca va  ! Comment tu vas ?! ", "25/05/2018 10:01",1,1,3);
 
-INSERT INTO Message ( content , idUserSource , idUserDestinatin)
-VALUES ( "Nunc maximus nec enim nec mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos", 1,3);
 
-INSERT INTO Message ( content , idUserSource , idUserDestinatin)
-VALUES ("Nunc a luctus turpis, convallis dapibus nunc.", 3,1);
+-------------------------------------------------------------------------------
 
-INSERT INTO Message ( content , idUserSource , idUserDestinatin)
-VALUES ("Curabitur massa dui, iaculis rutrum nisi eu, blandit rutrum velit. Vivamus id sollicitudin nisi.", 3,1);
+INSERT INTO Personnes (nomPersonnes, username, password, toke, idRole, Telephone_Number) VALUES ("grosminet", "titi", "cce66316b4c1c59df94a35afb80cecd82d1a8d91b554022557e115f5c275f515","oui",0,1);
+
+-------------------------------------------------------------------------------
+
+INSERT INTO Conversation(idConversation , nomConv , date )
+VALUES (1,"First Conversation","25/05/2018");
+
+-------------------------------------------------------------------------------
+
+INSERT INTO user_Conversation(idUser ,idConversation)
+VALUES (1,1);
+
+INSERT INTO user_Conversation(idUser ,idConversation)
+VALUES (2,1);
+
+-------------------------------------------------------------------------------

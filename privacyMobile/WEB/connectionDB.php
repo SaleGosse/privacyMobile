@@ -3,20 +3,24 @@
 	function connectionDB()
 	{
 		//connection with data base
-		$servername = "localhost";
+		$host_name = "localhost";
+		$admin_name = "root";
+		$admin_pass = "pass";
+		$db_name = "privacyDB";
+
 		try
 		{
 			//creat data base connection with pdo
-			$dataB = new PDO("mysql:host=$servername;dbname=privacyDB", "root", "pass");
+			$dataDB = new PDO("mysql:host=$host_name;dbname=$db_name", $admin_name, $admin_pass);
 
 			// set the PDO error mode to exception
-			$dataB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$dataDB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			//echo "Connected successfully";
 		}
 		catch(PDOException $e)
 		{
 			echo "Connection failed: " . $e->getMessage();
 		}
-		return $dataB;
+		return $dataDB;
 	}
 ?>
