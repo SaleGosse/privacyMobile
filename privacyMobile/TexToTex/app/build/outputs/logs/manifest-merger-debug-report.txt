@@ -1,0 +1,149 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:2:1-33:12
+INJECTED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:2:1-33:12
+INJECTED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:2:1-33:12
+INJECTED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:2:1-33:12
+MERGED from [com.android.support:design:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/14caba6bdddee02cb71f11504cf9e342/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:appcompat-v7:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/8c74971e2442bb5fba30e88f93d94a2c/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-v4:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/support-v4-27.1.1.aar/b1fc494175daae429b7016787fe31203/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.volley:volley:1.0.0] /home/user420/.gradle/caches/transforms-1/files-1.1/volley-1.0.0.aar/cdffe80262728f2719a0243e260614e9/AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support.constraint:constraint-layout:1.1.0] /home/user420/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.0.aar/8bbe13766e65713a0b4830570f0eef32/AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:support-fragment:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/a8fd8f844a3cc00418fbc5e5890863fe/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/08894df3a64fa117db260691b381a1d8/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:recyclerview-v7:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-27.1.1.aar/ac52902d7ee5a91ca17ca566e5d5f6fd/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/d7e1219abb3b9508804b34ef052eefb5/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/6b8cf4b498675e755cd85603052df2b1/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/96da920253a7ef7109ddf6da102e5ff5/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-media-compat:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/161d45d371524f11855f171cf1a94cb0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:transition:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/transition-27.1.1.aar/34d532e1c64d21671c29c8bc53c28f23/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/2ead55fbbc118417eb388065ea1b1afd/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /home/user420/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/c20d9259987405c6e8e7255d27542d28/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /home/user420/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/dde0a4ed94b348c946ece77a859ac24d/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /home/user420/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/2e77ea0264edd0bb1b005bba27bcb50e/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.0] /home/user420/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/9ce9608cef62db5b96ceef916ff4b489/AndroidManifest.xml:17:1-22:12
+INJECTED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:2:1-33:12
+INJECTED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:2:1-33:12
+INJECTED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:2:1-33:12
+	package
+		ADDED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:3:5-32
+		INJECTED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml
+		INJECTED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml
+		ADDED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:2:1-33:12
+		INJECTED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml
+		ADDED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:2:1-33:12
+		INJECTED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:2:11-69
+uses-permission#android.permission.GET_ACCOUNTS
+ADDED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:6:5-71
+	android:name
+		ADDED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:6:22-68
+uses-permission#android.permission.READ_PROFILE
+ADDED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:7:5-71
+	android:name
+		ADDED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:7:22-68
+uses-permission#android.permission.INTERNET
+ADDED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:8:5-66
+	android:name
+		ADDED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:8:22-64
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:9:5-78
+	android:name
+		ADDED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:9:22-76
+application
+ADDED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:11:5-31:19
+MERGED from [com.android.volley:volley:1.0.0] /home/user420/.gradle/caches/transforms-1/files-1.1/volley-1.0.0.aar/cdffe80262728f2719a0243e260614e9/AndroidManifest.xml:9:5-20
+MERGED from [com.android.volley:volley:1.0.0] /home/user420/.gradle/caches/transforms-1/files-1.1/volley-1.0.0.aar/cdffe80262728f2719a0243e260614e9/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.1.0] /home/user420/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.0.aar/8bbe13766e65713a0b4830570f0eef32/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.1.0] /home/user420/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.0.aar/8bbe13766e65713a0b4830570f0eef32/AndroidManifest.xml:9:5-20
+	android:supportsRtl
+		ADDED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:16:9-35
+	android:label
+		ADDED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:14:9-41
+	android:roundIcon
+		ADDED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:15:9-54
+	android:icon
+		ADDED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:13:9-43
+	android:allowBackup
+		ADDED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:12:9-35
+	android:theme
+		ADDED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:17:9-40
+activity#textotex.textotex.MainActivity
+ADDED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:18:9-27:20
+	android:label
+		ADDED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:20:13-45
+	android:theme
+		ADDED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:21:13-56
+	android:name
+		ADDED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:19:13-41
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:22:13-26:29
+action#android.intent.action.MAIN
+ADDED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:23:17-69
+	android:name
+		ADDED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:23:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:25:17-77
+	android:name
+		ADDED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:25:27-74
+activity#textotex.textotex.LoginActivity
+ADDED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:28:9-30:69
+	android:label
+		ADDED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:30:13-57
+	android:name
+		ADDED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml:29:13-42
+uses-sdk
+INJECTED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml
+INJECTED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml
+MERGED from [com.android.support:design:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/14caba6bdddee02cb71f11504cf9e342/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:design:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/14caba6bdddee02cb71f11504cf9e342/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/8c74971e2442bb5fba30e88f93d94a2c/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/8c74971e2442bb5fba30e88f93d94a2c/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/support-v4-27.1.1.aar/b1fc494175daae429b7016787fe31203/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/support-v4-27.1.1.aar/b1fc494175daae429b7016787fe31203/AndroidManifest.xml:20:5-44
+MERGED from [com.android.volley:volley:1.0.0] /home/user420/.gradle/caches/transforms-1/files-1.1/volley-1.0.0.aar/cdffe80262728f2719a0243e260614e9/AndroidManifest.xml:7:5-43
+MERGED from [com.android.volley:volley:1.0.0] /home/user420/.gradle/caches/transforms-1/files-1.1/volley-1.0.0.aar/cdffe80262728f2719a0243e260614e9/AndroidManifest.xml:7:5-43
+MERGED from [com.android.support.constraint:constraint-layout:1.1.0] /home/user420/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.0.aar/8bbe13766e65713a0b4830570f0eef32/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.1.0] /home/user420/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.0.aar/8bbe13766e65713a0b4830570f0eef32/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:support-fragment:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/a8fd8f844a3cc00418fbc5e5890863fe/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/a8fd8f844a3cc00418fbc5e5890863fe/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/08894df3a64fa117db260691b381a1d8/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/08894df3a64fa117db260691b381a1d8/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-27.1.1.aar/ac52902d7ee5a91ca17ca566e5d5f6fd/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-27.1.1.aar/ac52902d7ee5a91ca17ca566e5d5f6fd/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/d7e1219abb3b9508804b34ef052eefb5/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/d7e1219abb3b9508804b34ef052eefb5/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/6b8cf4b498675e755cd85603052df2b1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/6b8cf4b498675e755cd85603052df2b1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/96da920253a7ef7109ddf6da102e5ff5/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/96da920253a7ef7109ddf6da102e5ff5/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/161d45d371524f11855f171cf1a94cb0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/161d45d371524f11855f171cf1a94cb0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/transition-27.1.1.aar/34d532e1c64d21671c29c8bc53c28f23/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/transition-27.1.1.aar/34d532e1c64d21671c29c8bc53c28f23/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/2ead55fbbc118417eb388065ea1b1afd/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] /home/user420/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/2ead55fbbc118417eb388065ea1b1afd/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /home/user420/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/c20d9259987405c6e8e7255d27542d28/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /home/user420/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/c20d9259987405c6e8e7255d27542d28/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /home/user420/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/dde0a4ed94b348c946ece77a859ac24d/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /home/user420/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/dde0a4ed94b348c946ece77a859ac24d/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /home/user420/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/2e77ea0264edd0bb1b005bba27bcb50e/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /home/user420/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/2e77ea0264edd0bb1b005bba27bcb50e/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] /home/user420/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/9ce9608cef62db5b96ceef916ff4b489/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] /home/user420/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/9ce9608cef62db5b96ceef916ff4b489/AndroidManifest.xml:20:5-44
+INJECTED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml
+INJECTED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml
+		ADDED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml
+		INJECTED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml
+		ADDED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml
+		INJECTED from /home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/AndroidManifest.xml

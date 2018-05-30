@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="/home/user420/CLASS/TP_Mobile/TexToTex/app/src/main/assets"/><source path="/home/user420/CLASS/TP_Mobile/TexToTex/app/build/generated/assets/shaders/debug"/></dataSet><dataSet config="debug"><source path="/home/user420/CLASS/TP_Mobile/TexToTex/app/src/debug/assets"/></dataSet></merger>
