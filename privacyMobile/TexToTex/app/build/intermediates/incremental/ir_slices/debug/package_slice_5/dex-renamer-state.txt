@@ -1,4 +1,0 @@
-#Sun May 27 22:22:02 CEST 2018
-base.0=/home/user420/CLASS/TP_Mobile/TexToTex/app/build/intermediates/transforms/dexMerger/debug/24
-path.0=classes.dex
-renamed.0=classes.dex
