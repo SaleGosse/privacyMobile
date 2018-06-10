@@ -1,0 +1,173 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:2:1-48:12
+INJECTED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:2:1-48:12
+INJECTED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:2:1-48:12
+INJECTED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:2:1-48:12
+MERGED from [com.android.support:design:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/966548bc0d07dc5b8b5a8a963472bd24/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:appcompat-v7:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/9b8cdc15b946bea63f062bdc2de3c078/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-v4:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/support-v4-27.1.1.aar/276d2a7d832b37a5921650e8e71d98c5/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.volley:volley:1.0.0] /home/user/.gradle/caches/transforms-1/files-1.1/volley-1.0.0.aar/57ebf26fd69219dbca12fe90dceac9c7/AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:cardview-v7:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/cardview-v7-27.1.1.aar/8dc9b77a53d94c75104a16199a65c555/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-fragment:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/26a2aaed41cad362e8d8efef2983ccd3/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/8f44111e3f0f0fdc051ae27d06fae079/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:recyclerview-v7:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-27.1.1.aar/4792e2609edf86d545b6696de1a9b7cb/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/d539463804d59624ce48eebaf947a7f8/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/809a044d3d2fef93b4debe689f70a2ab/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/d6030ccf081251d8d861e31c3dbc5c0d/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-media-compat:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/6a074bbbc47c80b5eb183d71f9762d27/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:transition:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/transition-27.1.1.aar/d3b55060b006938552568117f41805af/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/cf99a9c18eaa0ace9319811b97b822b0/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /home/user/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/c5ecac73353515770b437a5247402a67/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /home/user/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/f4aad509f465b60827fe04e0127c3daa/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /home/user/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/0a5e3aa82393cf1cc6c88a77d31ab80c/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.0] /home/user/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/766f8e7e941d76a2ae31cdfc1f7e1e24/AndroidManifest.xml:17:1-22:12
+INJECTED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:2:1-48:12
+INJECTED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:2:1-48:12
+INJECTED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:2:1-48:12
+	package
+		ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:3:5-32
+		INJECTED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml
+		INJECTED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml
+		ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:2:1-48:12
+		INJECTED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml
+		ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:2:1-48:12
+		INJECTED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:2:11-69
+uses-permission#android.permission.GET_ACCOUNTS
+ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:6:5-71
+	android:name
+		ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:6:22-68
+uses-permission#android.permission.READ_PROFILE
+ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:7:5-71
+	android:name
+		ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:7:22-68
+uses-permission#android.permission.INTERNET
+ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:8:5-66
+	android:name
+		ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:8:22-64
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:9:5-78
+	android:name
+		ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:9:22-76
+uses-permission#android.permission.SYSTEM_ALERT_WINDOW
+ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:10:5-77
+	android:name
+		ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:10:22-75
+application
+ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:12:5-47:19
+MERGED from [com.android.volley:volley:1.0.0] /home/user/.gradle/caches/transforms-1/files-1.1/volley-1.0.0.aar/57ebf26fd69219dbca12fe90dceac9c7/AndroidManifest.xml:9:5-20
+MERGED from [com.android.volley:volley:1.0.0] /home/user/.gradle/caches/transforms-1/files-1.1/volley-1.0.0.aar/57ebf26fd69219dbca12fe90dceac9c7/AndroidManifest.xml:9:5-20
+	android:supportsRtl
+		ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:17:9-35
+	android:label
+		ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:15:9-41
+	android:roundIcon
+		ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:16:9-54
+	android:icon
+		ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:14:9-43
+	android:allowBackup
+		ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:13:9-35
+	android:theme
+		ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:18:9-40
+activity#textotex.textotex.MainActivity
+ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:19:9-28:20
+	android:label
+		ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:21:13-45
+	android:theme
+		ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:22:13-56
+	android:name
+		ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:20:13-41
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:23:13-27:29
+action#android.intent.action.MAIN
+ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:24:17-69
+	android:name
+		ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:24:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:26:17-77
+	android:name
+		ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:26:27-74
+activity#textotex.textotex.Activity_SignUp
+ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:29:9-31:20
+	android:label
+		ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:29:51-74
+	android:name
+		ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:29:19-50
+activity#textotex.textotex.LoginActivity
+ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:32:9-35:20
+	android:label
+		ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:34:13-57
+	android:name
+		ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:33:13-42
+activity#textotex.textotex.Chatroom
+ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:36:9-37:20
+	android:name
+		ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:36:19-43
+service#textotex.textotex.NotificationService
+ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:39:9-43:19
+	android:label
+		ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:42:13-54
+	android:icon
+		ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:41:13-47
+	android:name
+		ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:40:13-48
+receiver#textotex.textotex.NotificationReceiver
+ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:45:9-67
+	android:name
+		ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml:45:19-55
+uses-sdk
+INJECTED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml
+INJECTED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml
+MERGED from [com.android.support:design:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/966548bc0d07dc5b8b5a8a963472bd24/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:design:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/966548bc0d07dc5b8b5a8a963472bd24/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/9b8cdc15b946bea63f062bdc2de3c078/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/9b8cdc15b946bea63f062bdc2de3c078/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/support-v4-27.1.1.aar/276d2a7d832b37a5921650e8e71d98c5/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/support-v4-27.1.1.aar/276d2a7d832b37a5921650e8e71d98c5/AndroidManifest.xml:20:5-44
+MERGED from [com.android.volley:volley:1.0.0] /home/user/.gradle/caches/transforms-1/files-1.1/volley-1.0.0.aar/57ebf26fd69219dbca12fe90dceac9c7/AndroidManifest.xml:7:5-43
+MERGED from [com.android.volley:volley:1.0.0] /home/user/.gradle/caches/transforms-1/files-1.1/volley-1.0.0.aar/57ebf26fd69219dbca12fe90dceac9c7/AndroidManifest.xml:7:5-43
+MERGED from [com.android.support:cardview-v7:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/cardview-v7-27.1.1.aar/8dc9b77a53d94c75104a16199a65c555/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cardview-v7:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/cardview-v7-27.1.1.aar/8dc9b77a53d94c75104a16199a65c555/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/26a2aaed41cad362e8d8efef2983ccd3/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/26a2aaed41cad362e8d8efef2983ccd3/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/8f44111e3f0f0fdc051ae27d06fae079/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/8f44111e3f0f0fdc051ae27d06fae079/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-27.1.1.aar/4792e2609edf86d545b6696de1a9b7cb/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-27.1.1.aar/4792e2609edf86d545b6696de1a9b7cb/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/d539463804d59624ce48eebaf947a7f8/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/d539463804d59624ce48eebaf947a7f8/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/809a044d3d2fef93b4debe689f70a2ab/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/809a044d3d2fef93b4debe689f70a2ab/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/d6030ccf081251d8d861e31c3dbc5c0d/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/d6030ccf081251d8d861e31c3dbc5c0d/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/6a074bbbc47c80b5eb183d71f9762d27/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/6a074bbbc47c80b5eb183d71f9762d27/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/transition-27.1.1.aar/d3b55060b006938552568117f41805af/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/transition-27.1.1.aar/d3b55060b006938552568117f41805af/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/cf99a9c18eaa0ace9319811b97b822b0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] /home/user/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/cf99a9c18eaa0ace9319811b97b822b0/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /home/user/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/c5ecac73353515770b437a5247402a67/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /home/user/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/c5ecac73353515770b437a5247402a67/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /home/user/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/f4aad509f465b60827fe04e0127c3daa/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /home/user/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/f4aad509f465b60827fe04e0127c3daa/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /home/user/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/0a5e3aa82393cf1cc6c88a77d31ab80c/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /home/user/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/0a5e3aa82393cf1cc6c88a77d31ab80c/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] /home/user/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/766f8e7e941d76a2ae31cdfc1f7e1e24/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] /home/user/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/766f8e7e941d76a2ae31cdfc1f7e1e24/AndroidManifest.xml:20:5-44
+INJECTED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml
+INJECTED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml
+		ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml
+		INJECTED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml
+		ADDED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml
+		INJECTED from /home/user/Bureau/pierre/privacyMobile/TexToTex/app/src/main/AndroidManifest.xml
