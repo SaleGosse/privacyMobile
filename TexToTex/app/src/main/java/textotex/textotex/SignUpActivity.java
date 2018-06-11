@@ -162,7 +162,6 @@ public class SignUpActivity extends Activity
 
                 // Enter URL address where your php file resides
                 url = new URL(getString(R.string.url_base) + getString(R.string.url_create_account));
-                //url = new URL("http://10.105.249.0:8000/login.php");
             } catch (MalformedURLException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

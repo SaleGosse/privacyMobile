@@ -55,7 +55,7 @@ CREATE TABLE `Message` (
   `content` text,
   `date` datetime DEFAULT NULL,
   PRIMARY KEY (`idMessage`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,7 +64,7 @@ CREATE TABLE `Message` (
 
 LOCK TABLES `Message` WRITE;
 /*!40000 ALTER TABLE `Message` DISABLE KEYS */;
-INSERT INTO `Message` VALUES (1,1,1,'Salut !','2018-05-25 10:00:34'),(2,1,2,'Salut ! Comment tu vas ?!','2018-05-25 10:45:21'),(3,1,1,'Tranquille, j\'ai des bonbons dans ma camionette...','2018-05-25 10:55:34'),(4,1,1,'Th','2018-05-25 11:59:56'),(5,1,1,'Test','2018-06-05 14:12:55'),(7,1,2,'Trpp','2018-06-05 14:57:20'),(8,3,2,'Salut ! ','2018-06-05 14:57:49'),(9,3,1,'','2018-06-05 14:59:20'),(10,3,1,'Salut l\'ami ','2018-06-05 14:59:33'),(11,3,2,'Coucou','2018-06-05 15:02:37'),(12,3,1,'','2018-06-05 15:03:09'),(13,3,1,'Salut salut ','2018-06-05 15:03:24'),(14,1,2,'Jtai','2018-06-05 15:03:57'),(15,1,1,'Pont','2018-06-05 15:04:12'),(16,3,2,'Je is ','2018-06-05 15:06:37'),(17,3,2,'I\'ve been e for a ','2018-06-05 15:06:39'),(18,3,2,'Ggzzu s','2018-06-05 15:06:40'),(24,1,1,'Trop','2018-06-06 13:18:54'),(25,1,1,'Test','2018-06-06 14:37:34'),(26,1,1,'Rhgfg','2018-06-06 14:37:49'),(46,1,2,'Yoyo','2018-06-10 21:12:57'),(47,1,1,'bien','2018-06-10 21:21:17'),(48,1,1,'bien','2018-06-10 21:22:44'),(49,1,2,'TEST','2018-06-11 16:19:15');
+INSERT INTO `Message` VALUES (1,1,1,'Salut !','2018-05-25 10:00:34'),(2,1,2,'Salut ! Comment tu vas ?!','2018-05-25 10:45:21'),(3,1,1,'Tranquille, j\'ai des bonbons dans ma camionette...','2018-05-25 10:55:34'),(4,1,1,'Th','2018-05-25 11:59:56'),(5,1,1,'Test','2018-06-05 14:12:55'),(7,1,2,'Trpp','2018-06-05 14:57:20'),(8,3,2,'Salut ! ','2018-06-05 14:57:49'),(9,3,1,'','2018-06-05 14:59:20'),(10,3,1,'Salut l\'ami ','2018-06-05 14:59:33'),(11,3,2,'Coucou','2018-06-05 15:02:37'),(12,3,1,'','2018-06-05 15:03:09'),(13,3,1,'Salut salut ','2018-06-05 15:03:24'),(14,1,2,'Jtai','2018-06-05 15:03:57'),(15,1,1,'Pont','2018-06-05 15:04:12'),(16,3,2,'Je is ','2018-06-05 15:06:37'),(17,3,2,'I\'ve been e for a ','2018-06-05 15:06:39'),(18,3,2,'Ggzzu s','2018-06-05 15:06:40'),(24,1,1,'Trop','2018-06-06 13:18:54'),(25,1,1,'Test','2018-06-06 14:37:34'),(26,1,1,'Rhgfg','2018-06-06 14:37:49'),(46,1,2,'Yoyo','2018-06-10 21:12:57'),(47,1,1,'bien','2018-06-10 21:21:17'),(48,1,1,'bien','2018-06-10 21:22:44');
 /*!40000 ALTER TABLE `Message` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -81,7 +81,7 @@ CREATE TABLE `MessageStatus` (
   `idUser` int(11) DEFAULT NULL,
   `unread` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`idMessageStatus`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,6 +90,7 @@ CREATE TABLE `MessageStatus` (
 
 LOCK TABLES `MessageStatus` WRITE;
 /*!40000 ALTER TABLE `MessageStatus` DISABLE KEYS */;
+INSERT INTO `MessageStatus` VALUES (7,56,1,0);
 /*!40000 ALTER TABLE `MessageStatus` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -181,4 +182,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-06-11 16:21:34
+-- Dump completed on 2018-06-11 18:57:07
