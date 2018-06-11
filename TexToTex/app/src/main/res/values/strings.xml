@@ -36,12 +36,8 @@
     <string name="cookie_key">textotex_cookie</string>
 
     <!-- Strings related to urls -->
-<<<<<<< HEAD
     <!--192.168.1.20-->
     <string name="url_base">http://192.168.1.20:8000/</string>
-=======
-    <string name="url_base">http://10.105.249.0:8000/</string>
->>>>>>> 62bdfc748548a16f3ef8dce4867672c1a6d070cc
 
     <string name="url_login" translatable="false">login.php</string>
     <string name="url_check_cookie" translatable="false">checkCookie.php</string>
