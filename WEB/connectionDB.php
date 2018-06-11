@@ -6,7 +6,7 @@
 		$host_name = "localhost";
 		$admin_name = "root";
 		$admin_pass = "pass";
-		$db_name = "privacyDB";
+		$db_name = "privacyDBBis";
 
 		try
 		{
