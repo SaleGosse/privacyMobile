@@ -68,7 +68,7 @@
 
 			$users = $request->fetchAll(PDO::FETCH_ASSOC);
 			
-			$rq_add_notif = "INSERT INTO MessageStatus (idUser,idMessage,unread) VALUES (:userID,:messageID,1)";
+			$rq_add_notif = "INSERT INTO MessageStatus (idUser,idMessage,unread,notified) VALUES (:userID,:messageID,1,0)";
 			$request = $db->prepare($rq_add_notif);
 
 			for ($i=0; $i < count($users); $i++) {
