@@ -1,6 +1,8 @@
 package textotex.textotex;
 
 
+import android.app.Activity;
+import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -20,30 +22,30 @@ import java.util.Map;
 
 public class cookieManager {
 
-    final Context mContext;
+    final AppCompatActivity mActivity;
     final SharedPreferences mSharedPref;
     final SharedPreferences.Editor mEditor;
     final ProgressDialog pdLoading;
 
-    cookieManager(Context context) {
-        this.mContext = context;
-        this.mSharedPref = this.mContext.getSharedPreferences(this.mContext.getString(R.string.preference_file), Context.MODE_PRIVATE);
+    cookieManager(AppCompatActivity activity) {
+        this.mActivity = activity;
+        this.mSharedPref = this.mActivity.getSharedPreferences(this.mActivity.getString(R.string.preference_file), Context.MODE_PRIVATE);
         this.mEditor = this.mSharedPref.edit();
-        this.pdLoading = new ProgressDialog(this.mContext);
+        this.pdLoading = new ProgressDialog(this.mActivity);
     }
 
     public void checkSession() {
 
         //Resetting the isLogged boolean to check everything
-        mEditor.putBoolean(mContext.getString(R.string.is_logged_key), false);
+        mEditor.putBoolean(mActivity.getString(R.string.is_logged_key), false);
         mEditor.commit();
 
         //Getting the cookie
-        final String cookie = this.mSharedPref.getString(this.mContext.getString(R.string.cookie_key), "null");
+        final String cookie = this.mSharedPref.getString(this.mActivity.getString(R.string.cookie_key), "null");
 
         //If no cookie, put isLogged/cookie to "null"/false and start Logging Activity
         if(cookie == null || cookie.compareTo("null") == 0) {
-            mEditor.putString(mContext.getString(R.string.cookie_key), "null");
+            mEditor.putString(mActivity.getString(R.string.cookie_key), "null");
             mEditor.commit();
 
             this.callLogin();
@@ -52,9 +54,9 @@ public class cookieManager {
         }
 
         //Getting the login, if no, same
-        final String login = mSharedPref.getString(mContext.getString(R.string.login_key), "null");
+        final String login = mSharedPref.getString(mActivity.getString(R.string.login_key), "null");
         if(login.compareTo("null") == 0){
-            mEditor.putString(mContext.getString(R.string.cookie_key), "null");
+            mEditor.putString(mActivity.getString(R.string.cookie_key), "null");
             mEditor.commit();
 
             this.callLogin();
@@ -63,7 +65,7 @@ public class cookieManager {
         }
 
         //The request queue..
-        final RequestQueue queue = Volley.newRequestQueue(mContext);
+        final RequestQueue queue = Volley.newRequestQueue(mActivity);
 
         queue.addRequestFinishedListener(new RequestQueue.RequestFinishedListener<Object>() {
             @Override
@@ -75,19 +77,19 @@ public class cookieManager {
         //TODO: Put a loading screen to prevent user inputs
 
         //The request..
-        final StringRequest stringRequest = new StringRequest(Request.Method.POST, mContext.getString(R.string.url_base) + mContext.getString(R.string.url_check_cookie),
+        final StringRequest stringRequest = new StringRequest(Request.Method.POST, mActivity.getString(R.string.url_base) + mActivity.getString(R.string.url_check_cookie),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         if(response.contains("true")){
-                            mEditor.putBoolean(mContext.getString(R.string.is_logged_key), true);
+                            mEditor.putBoolean(mActivity.getString(R.string.is_logged_key), true);
                             mEditor.commit();
                         }
                         else if(response.contains("false"))
                         {
                             if(response.contains("error: ")) {
                                 String error_str = response.substring(response.indexOf("error: ") + "error: ".length());
-                                Toast.makeText(mContext, error_str, Toast.LENGTH_LONG);
+                                Toast.makeText(mActivity, error_str, Toast.LENGTH_LONG);
                             }
                             callLogin();
                         }
@@ -118,21 +120,22 @@ public class cookieManager {
         pdLoading.setCancelable(false);
         pdLoading.show();
 
-        queue.add(stringRequest);
+       queue.add(stringRequest);
     }
 
     private void callLogin() {
         //TODO: Finish the calling activity
-        ((AppCompatActivity)mContext).finish();
+        mActivity.finish();
 
         //Creating the new intent
-        Intent newIntent = new Intent(mContext, LoginActivity.class);
+        Intent newIntent = new Intent(mActivity, LoginActivity.class);
 
         //Putting info in the bundle
-        newIntent.putExtra("login", mContext.getString(R.string.login_key));
+        newIntent.putExtra("login", mActivity.getString(R.string.login_key));
 
         //Starting the new activity
-        mContext.startActivity(newIntent);
+        mActivity.startActivity(newIntent);
+
     }
 
 

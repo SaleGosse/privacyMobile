@@ -4,7 +4,7 @@
 
 	if(isset($_POST['cookie']))
 	{	
-		$db =  connectionDB();
+		$db = connectionDB();
 		
 		$cookie = (string)$_POST['cookie'];
 			
