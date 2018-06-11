@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="textotex.textotex.MainActivity"
+    tools:context=".Chatroom"
     android:background="@color/graylight"
     android:orientation="vertical">
 
@@ -51,8 +51,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Photos"
-                        android:textSize="20sp" />
+                        android:text="Conversation"
+                        android:textSize="10sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -76,7 +76,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Followers"
-                        android:textSize="20sp" />
+                        android:textSize="10sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -99,8 +99,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Following"
-                        android:textSize="20sp" />
+                        android:text="Message"
+                        android:textSize="10sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -141,7 +141,8 @@
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="20dp"
                 android:text="Wiliam@gmail.com"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textSize="10sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -158,46 +159,14 @@
 
             <TextView
                 android:layout_width="wrap_content"
-
+                android:textSize="10sp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="20dp"
                 android:text="+266 225 225"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:orientation="horizontal"
-            android:paddingLeft="25dp">
-
-            <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:src="@drawable/ic_chat_black_24dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:paddingLeft="20dp"
-                android:text="Add to group"
-                android:textStyle="bold" />
+                android:textStyle="bold
+                    " />
         </LinearLayout>
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/bt_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="17dp"
-        android:background="@drawable/buttonstyle"
-        android:text="Follow Me"
-        android:textColor="@color/black" />
-
 </LinearLayout>
