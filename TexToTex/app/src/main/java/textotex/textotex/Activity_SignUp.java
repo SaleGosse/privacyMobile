@@ -26,9 +26,8 @@ import java.util.concurrent.ExecutionException;
 
 public class Activity_SignUp extends Activity
 {
-    public static final int READ_TIMEOUT=100;
-    public static final int CONNECTION_TIMEOUT=100;
-    private Button buttonSend;
+    public static final int READ_TIMEOUT=1500;
+    public static final int CONNECTION_TIMEOUT=1500;
     private EditText mail;
     private EditText passwd;
     private EditText passwdBis;
@@ -45,7 +44,7 @@ public class Activity_SignUp extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         isAgree  = findViewById(R.id.chkBox1);
-        buttonSend = findViewById(R.id.btn_signUp);
+        Button buttonSend = findViewById(R.id.btn_signUp);
         mail = findViewById(R.id.mail);
         passwd = findViewById(R.id.password);
         passwdBis = findViewById(R.id.bisPassword);
@@ -56,9 +55,7 @@ public class Activity_SignUp extends Activity
             public void onClick(View arg0) {
                 try {
                     sendInfoServer(arg0);
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
+                } catch (ExecutionException | InterruptedException e) {
                     e.printStackTrace();
                 }
             }
@@ -72,39 +69,43 @@ public class Activity_SignUp extends Activity
         passwordBisS = passwdBis.getText().toString();
         mailS = mail.getText().toString();
 
-        boolean isOk;
         if( passwordBisS == null || passwordBisS.isEmpty())
         {
-            isOk = false;
-            return isOk;
+            return false;
         }
         if( usernameS == null || usernameS.isEmpty())
         {
-            isOk = false;
-            return isOk;
+            return false;
         }
         if( passwordS == null || passwordS.isEmpty())
         {
-            isOk = false;
-            return isOk;
+            return false;
         }
+
         if( mailS == null || mailS.isEmpty())
         {
-            isOk = false;
+
             isAgree.setText("Mail is empty or wrong !");
-            return isOk;
+            return false;
         }
         if( !passwordBisS.equals(passwordS))
         {
-            isOk = false;
             isAgree.setText("Wrong password ! Re-type again");
             //isAgree.setText(passwordBisS + " " + passwordS);
             passwdBis.setText("");
             passwd.setText("");
-            return isOk;
+            return false;
         }
-        isOk = true;
-        return isOk;
+        if(!isPasswordValid(passwordS))
+        {
+            isAgree.setText("Wrong password is too short min 5 char ! Re-type again");
+            //isAgree.setText(passwordBisS + " " + passwordS);
+            passwdBis.setText("");
+            passwd.setText("");
+            return false;
+        }
+
+        return true;
     }
 
     public void sendInfoServer(View arg0) throws ExecutionException, InterruptedException {
@@ -114,7 +115,7 @@ public class Activity_SignUp extends Activity
             {
                 AsyncTask toto = new AsyncSendServer().execute();
                 String result = (String) toto.get();
-                isAgree.setText(result);
+                isAgree.setText(result.toString());
                 if(result.compareTo("true") == 0)
                 {
                     finish();
@@ -126,7 +127,8 @@ public class Activity_SignUp extends Activity
                     isAgree.setTextColor(Color.YELLOW);
                 }
             }
-            else{
+            else
+                {
                 isAgree.setTextColor(Color.RED);
             }
 
@@ -242,5 +244,12 @@ public class Activity_SignUp extends Activity
         }
     }
 
+    private boolean isPasswordValid(String password) {
+        //TODO: Replace this with your own logic
+        if(password.length() < 5)
+            return false;
+
+        return true;
+    }
 
 }

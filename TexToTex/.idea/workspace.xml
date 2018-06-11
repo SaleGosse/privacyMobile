@@ -48,11 +48,60 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Chatroom.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Chatroom.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/textotex/textotex/Chatroom.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
+            <state relative-caret-position="589">
               <caret line="70" column="7" lean-forward="false" selection-start-line="70" selection-start-column="7" selection-end-line="70" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LoginActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/textotex/textotex/LoginActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="94">
+              <caret line="108" column="31" lean-forward="false" selection-start-line="108" selection-start-column="31" selection-end-line="108" selection-end-column="31" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="docComment;field#mAuthTask#0;class#LoginActivity#0" expanded="false" />
+                <element signature="e#2618#2764#0" expanded="true" />
+                <element signature="e#2763#2764#0" expanded="true" />
+                <element signature="e#2866#3018#0" expanded="true" />
+                <element signature="e#3017#3018#0" expanded="true" />
+                <element signature="method#attemptLogin#0;class#LoginActivity#0" expanded="false" />
+                <element signature="e#4035#4075#0" expanded="true" />
+                <element signature="e#4488#4528#0" expanded="true" />
+                <element signature="method#isUsernameValid#0;class#LoginActivity#0" expanded="false" />
+                <element signature="e#5558#5587#0" expanded="true" />
+                <element signature="method#isPasswordValid#0;class#LoginActivity#0" expanded="false" />
+                <element signature="e#5776#5815#0" expanded="true" />
+                <element signature="e#5872#5901#0" expanded="true" />
+                <element signature="class#UserLoginTask#0;class#LoginActivity#0" expanded="false" />
+                <element signature="method#UserLoginTask#0;class#UserLoginTask#0;class#LoginActivity#0" expanded="false" />
+                <element signature="method#onPreExecute#0;class#UserLoginTask#0;class#LoginActivity#0" expanded="false" />
+                <element signature="method#doInBackground#0;class#UserLoginTask#0;class#LoginActivity#0" expanded="false" />
+                <element signature="e#7031#7059#0" expanded="true" />
+                <element signature="e#7062#7091#0" expanded="true" />
+                <element signature="method#onPostExecute#0;class#UserLoginTask#0;class#LoginActivity#0" expanded="false" />
+                <element signature="e#10903#10938#0" expanded="true" />
+                <element signature="e#11067#11100#0" expanded="true" />
+                <element signature="e#11142#11171#0" expanded="true" />
+                <element signature="e#11215#11246#0" expanded="true" />
+                <element signature="e#11291#11321#0" expanded="true" />
+                <element signature="e#11660#11697#0" expanded="true" />
+                <element signature="method#laodSignUpActivity#0;class#LoginActivity#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Activity_SignUp.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/textotex/textotex/Activity_SignUp.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="60" column="13" lean-forward="false" selection-start-line="60" selection-start-column="13" selection-end-line="60" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -84,8 +133,8 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/textotex/textotex/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="50" column="47" lean-forward="false" selection-start-line="50" selection-start-column="47" selection-end-line="50" selection-end-column="47" />
+            <state relative-caret-position="108">
+              <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -2134,6 +2183,8 @@
         <option value="$PROJECT_DIR$/app/src/main/java/textotex/textotex/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/textotex/textotex/Chatroom.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/profile_fragment.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/textotex/textotex/LoginActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/textotex/textotex/Activity_SignUp.java" />
       </list>
     </option>
   </component>
@@ -2375,7 +2426,7 @@
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24946846" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.054571226" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32978722" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2428,7 +2479,9 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="2" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -2439,14 +2492,6 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="296">
           <caret line="35" column="46" lean-forward="false" selection-start-line="35" selection-start-column="46" selection-end-line="35" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/textotex/textotex/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="50" column="47" lean-forward="false" selection-start-line="50" selection-start-column="47" selection-end-line="50" selection-end-column="47" />
           <folding />
         </state>
       </provider>
@@ -2472,8 +2517,61 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/textotex/textotex/Chatroom.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
+        <state relative-caret-position="589">
           <caret line="70" column="7" lean-forward="false" selection-start-line="70" selection-start-column="7" selection-end-line="70" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/textotex/textotex/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/textotex/textotex/LoginActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="94">
+          <caret line="108" column="31" lean-forward="false" selection-start-line="108" selection-start-column="31" selection-end-line="108" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;field#mAuthTask#0;class#LoginActivity#0" expanded="false" />
+            <element signature="e#2618#2764#0" expanded="true" />
+            <element signature="e#2763#2764#0" expanded="true" />
+            <element signature="e#2866#3018#0" expanded="true" />
+            <element signature="e#3017#3018#0" expanded="true" />
+            <element signature="method#attemptLogin#0;class#LoginActivity#0" expanded="false" />
+            <element signature="e#4035#4075#0" expanded="true" />
+            <element signature="e#4488#4528#0" expanded="true" />
+            <element signature="method#isUsernameValid#0;class#LoginActivity#0" expanded="false" />
+            <element signature="e#5558#5587#0" expanded="true" />
+            <element signature="method#isPasswordValid#0;class#LoginActivity#0" expanded="false" />
+            <element signature="e#5776#5815#0" expanded="true" />
+            <element signature="e#5872#5901#0" expanded="true" />
+            <element signature="class#UserLoginTask#0;class#LoginActivity#0" expanded="false" />
+            <element signature="method#UserLoginTask#0;class#UserLoginTask#0;class#LoginActivity#0" expanded="false" />
+            <element signature="method#onPreExecute#0;class#UserLoginTask#0;class#LoginActivity#0" expanded="false" />
+            <element signature="method#doInBackground#0;class#UserLoginTask#0;class#LoginActivity#0" expanded="false" />
+            <element signature="e#7031#7059#0" expanded="true" />
+            <element signature="e#7062#7091#0" expanded="true" />
+            <element signature="method#onPostExecute#0;class#UserLoginTask#0;class#LoginActivity#0" expanded="false" />
+            <element signature="e#10903#10938#0" expanded="true" />
+            <element signature="e#11067#11100#0" expanded="true" />
+            <element signature="e#11142#11171#0" expanded="true" />
+            <element signature="e#11215#11246#0" expanded="true" />
+            <element signature="e#11291#11321#0" expanded="true" />
+            <element signature="e#11660#11697#0" expanded="true" />
+            <element signature="method#laodSignUpActivity#0;class#LoginActivity#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/textotex/textotex/Activity_SignUp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="60" column="13" lean-forward="false" selection-start-line="60" selection-start-column="13" selection-end-line="60" selection-end-column="13" />
           <folding />
         </state>
       </provider>
