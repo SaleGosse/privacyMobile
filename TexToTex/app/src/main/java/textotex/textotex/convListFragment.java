@@ -1,6 +1,8 @@
 package textotex.textotex;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
@@ -35,10 +37,15 @@ public class convListFragment extends ListFragment {
 
     List<convListData> listData;
     ListView mListView;
+
+    private int mUserID;
+    private String mCookie;
+
     ProgressBar progressBar;
 
     public convListFragment() {
-
+        this.mUserID = getActivity().getSharedPreferences(getString(R.string.preference_file), Context.MODE_PRIVATE).getInt(getString(R.string.user_id_key), -1);
+        this.mCookie = getActivity().getSharedPreferences(getString(R.string.preference_file), Context.MODE_PRIVATE).getString(getString(R.string.cookie_key), "null");
     }
 
     @Override
@@ -111,8 +118,8 @@ public class convListFragment extends ListFragment {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
 
-                params.put("cookie", "mabite");
-                params.put("userID", Integer.toString(1));
+                params.put("cookie", convListFragment.this.mCookie);
+                params.put("userID", Integer.toString(convListFragment.this.mUserID));
 
                 return params;
             }
@@ -131,6 +138,8 @@ public class convListFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         int conversationID = listData.get(position).getConversationID();
         String conversationName = listData.get(position).getConversationName();
+
+        listData.get(position).toggleUnread();
 
         Intent intent = new Intent(getActivity(), Chatroom.class);
 

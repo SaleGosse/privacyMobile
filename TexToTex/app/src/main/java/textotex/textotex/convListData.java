@@ -31,6 +31,8 @@ public class convListData {
 
     public boolean getUnread() { return this.mUnread; }
 
+    public void toggleUnread() { this.mUnread = !(this.mUnread); }
+
 
 
 }

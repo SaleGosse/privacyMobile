@@ -23,7 +23,7 @@
 		$request->execute();
 		$result = $request->fetch();
 
-		if($result)
+		if(!$result)
 		{
 			echo "false\n";
 			echo "error: Invalid cookie.\n";
