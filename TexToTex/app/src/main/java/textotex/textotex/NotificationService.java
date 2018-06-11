@@ -60,7 +60,6 @@ public class NotificationService extends Service {
 
     @Override
     public void onCreate() {
-       // Toast.makeText(this, "Creating the service..", Toast.LENGTH_SHORT).show();
         Log.e("IUOP", "Creating the service..");
 
         this.mUserID = getSharedPreferences(getString(R.string.preference_file), Context.MODE_PRIVATE).getInt(getString(R.string.user_id_key), -1);
