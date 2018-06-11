@@ -1,9 +1,14 @@
 package textotex.textotex;
 
+import android.app.AlarmManager;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -17,30 +22,29 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 
-import java.util.HashMap;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private int mCurFragment = 0;
+    private Context mContext;
     private SecureClass sClass;
+
+    private cookieManager cm;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        this.mContext = this;
+
+        cm = new cookieManager(this);
+
+        cm.checkSession();
 
         final SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(getString(R.string.preference_file), Context.MODE_PRIVATE);
 
         sClass = new SecureClass(this, sharedPref);
-
-        checkSession();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -75,86 +79,15 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(this);
+
+        startService(new Intent(this.mContext, NotificationService.class));
+
     }
 
-    private boolean checkSession() {
-        final SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(getString(R.string.preference_file), Context.MODE_PRIVATE);
-
-        final SharedPreferences.Editor editor = sharedPref.edit();
-
-        //Resetting the isLogged boolean to check everything
-        editor.putBoolean(getString(R.string.is_logged_key), false);
-        editor.commit();
-
-        //Getting the cookie
-        final String cookie = sharedPref.getString(getString(R.string.cookie_key), "null");
-
-        //If no cookie, put isLogged/cookie to "null"/false and start Logging Activity
-        if(cookie.compareTo("null") == 0) {
-            editor.putString(getString(R.string.cookie_key), "null");
-            editor.commit();
-
-            this.finish();
-            startActivity(new Intent(MainActivity.this, LoginActivity.class));
-
-            return false;
-        }
-
-        //Getting the login, if no, same
-        final String login = sharedPref.getString(getString(R.string.login_key), "null");
-        if(login.compareTo("null") == 0){
-            editor.putString(getString(R.string.cookie_key), "null");
-            editor.commit();
-
-            this.finish();
-            startActivity(new Intent(MainActivity.this, LoginActivity.class));
-
-            return false;
-        }
-
-        //The request queue..
-        RequestQueue queue = Volley.newRequestQueue(this);
-
-        queue.addRequestFinishedListener(new RequestQueue.RequestFinishedListener<Object>() {
-            @Override
-            public void onRequestFinished(Request<Object> request) {
-                if(!sharedPref.getBoolean(getString(R.string.is_logged_key), false)) {
-                    MainActivity.this.finish();
-                   startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                }
-            }
-        });
-
-        //The request..
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, getString(R.string.url_base) + getString(R.string.url_check_cookie),
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        if(response.contains("true")){
-                            editor.putBoolean(getString(R.string.is_logged_key), true);
-                            editor.commit();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("login", login);
-                params.put("cookie", cookie);
-                return params;
-            }
-
-        };
-
-        queue.add(stringRequest);
-
-        return true;
+    private ServiceConnection connectService() {
+        return null;
     }
+
 
     @Override
     public void onBackPressed() {
@@ -171,6 +104,14 @@ public class MainActivity extends AppCompatActivity
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+
+    public void beginService() {
+        startService(new Intent(MainActivity.this, NotificationService.class));
+    }
+
+    public void endService() {
+        stopService(new Intent(MainActivity.this, NotificationService.class));
     }
 
     @Override
@@ -235,3 +176,11 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 }
+
+
+
+/* TODO:
+-Notification
+
+*/
+

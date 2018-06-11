@@ -22,7 +22,7 @@
 		$password = hash("sha256", $password);
 
 		$log_file = fopen("logs.txt", "a");
-		$log_txt = "d: " . date("h:i:sa") . ", u: " . $login . ", p: " . $password . "\n";
+		$log_txt = "d: [" . date("o-M-t G:i:sa") . "], u: [" . $login . "], p: [" . $password . "].\n";
 		fwrite($log_file, $log_txt);
 		//fclose($log_file);
 
@@ -46,7 +46,7 @@
 			$request->execute();
 
 			
-			$result="true" . "\n" . $cookie;
+			$result="true" . "\n" . "cookie: " . $cookie . "\n" . "idUser: " . $idUser . "\n";
 
 		}
 		else
@@ -58,7 +58,7 @@
 		$dataB = null;   // Disconnect
 		return;
 	}
-
-	echo "false";
+	else
+		echo "false\n" . "error: Missing POST parameters\n";
 	return;
 ?>

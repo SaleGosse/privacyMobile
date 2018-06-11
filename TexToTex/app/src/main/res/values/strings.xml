@@ -8,6 +8,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_signUp">Sign up</string>
     <string name="title_home_button">Go Home</string>
 
     <!-- Strings related to conv list fragment -->
@@ -27,21 +28,24 @@
     <string name="error_wrong_creds">The username or password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="error_not_logged">You aren\'t logged yet</string>
-    <string name="preference_file">textotex.textotex.PREFERENCE_FILE</string>
+    <string name="preference_file" translatable="false">textotex_textotex_PREFERENCE_FILE</string>
+
     <string name="is_logged_key">is_logged_textotex</string>
     <string name="login_key">textotex_login</string>
+    <string name="user_id_key">textotex_user_id</string>
     <string name="cookie_key">textotex_cookie</string>
 
-
-    <!-- school @pierre: 10.105.201.67 -->
-    <!-- school @fab: 10.105.249.0 -->
-    <!-- home @pierre: 192.168.1.20 -->
     <!-- Strings related to urls -->
-    <string name="url_base">http://10.105.201.67:8000/</string>
+    <string name="url_base">http://192.168.1.20:8000/</string>
 
-    <string name="url_login">login.php</string>
-    <string name="url_check_cookie">checkCookie.php</string>
-    <string name="url_start_conv">startConv.php</string>
-
+    <string name="url_login" translatable="false">login.php</string>
+    <string name="url_check_cookie" translatable="false">checkCookie.php</string>
+    <string name="url_conv_list" translatable="false">getConvList.php</string>
+    <string name="url_start_conv" translatable="false">startConv.php</string>
+    <string name="url_display_text" translatable="false">api_displayText.php</string>
+    <string name="url_inside_chat" translatable="false">api_IdUserInsideChat.php</string>
+    <string name="url_add_message" translatable="false">api_add_message.php</string>
+    <string name="url_check_message" translatable="false">api_check_message.php</string>
+    <string name="url_create_account" translatable="false">api_create_account.php</string>
 
 </resources>
