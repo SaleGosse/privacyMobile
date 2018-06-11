@@ -23,7 +23,7 @@
 		$request->execute();
 		$result = $request->fetch();
 
-		if(!$result)
+		if($result)
 		{
 			echo "false\n";
 			echo "error: Invalid cookie.\n";
@@ -83,8 +83,8 @@
 			$db = null;   // Disconnect
 		}
 		else 
-			echo "error: Invalid or missing POST parameters.";
+			echo "error: Invalid or missing POST parameters.\n";
 	}
 	else
-		echo "error: Missing cookie.";
+		echo "error: Missing cookie.\n";
 ?>
