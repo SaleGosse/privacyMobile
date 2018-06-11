@@ -1,6 +1,8 @@
 package textotex.textotex;
 
 
+import android.app.Activity;
+import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -118,7 +120,7 @@ public class cookieManager {
         pdLoading.setCancelable(false);
         pdLoading.show();
 
-        queue.add(stringRequest);
+       queue.add(stringRequest);
     }
 
     private void callLogin() {
@@ -133,6 +135,7 @@ public class cookieManager {
 
         //Starting the new activity
         mContext.startActivity(newIntent);
+
     }
 
 

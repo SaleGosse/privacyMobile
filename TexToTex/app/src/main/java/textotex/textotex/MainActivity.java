@@ -86,7 +86,6 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         startService(new Intent(this.mContext, NotificationService.class));
-
     }
 
     private ServiceConnection connectService() {
