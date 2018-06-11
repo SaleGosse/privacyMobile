@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity
     private int mCurFragment = 0;
     private Context mContext;
     private SecureClass sClass;
+    private int mUserID;
+    private String mCookie;
 
     private cookieManager cm;
 
@@ -46,13 +48,16 @@ public class MainActivity extends AppCompatActivity
 
         sClass = new SecureClass(this, sharedPref);
 
+        this.mUserID = sharedPref.getInt(getString(R.string.user_id_key), -1);
+        this.mCookie = sharedPref.getString(getString(R.string.cookie_key), "null");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        setCurFragment(new convListFragment());
+        setCurFragment(new convListFragment(this.mUserID, this.mCookie));
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -124,7 +129,7 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if(id == R.id.bt_home) {
             if(mCurFragment != R.id.nav_conv_list){
-                setCurFragment(new convListFragment());
+                setCurFragment(new convListFragment(this.mUserID, this.mCookie));
                 mCurFragment = R.id.nav_conv_list;
             }
 

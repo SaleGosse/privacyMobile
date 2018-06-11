@@ -4,7 +4,7 @@
 
 	if(isset($_POST['cookie']))
 	{	
-		$db =  connectionDB();
+		$db = connectionDB();
 		
 		$cookie = (string)$_POST['cookie'];
 			
@@ -23,7 +23,7 @@
 		$request->execute();
 		$result = $request->fetch();
 
-		if(!$result)
+		if($result)
 		{
 			echo "false\n";
 			echo "error: Invalid cookie.\n";

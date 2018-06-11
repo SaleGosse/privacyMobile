@@ -43,14 +43,13 @@ public class convListFragment extends ListFragment {
 
     ProgressBar progressBar;
 
-    public convListFragment() {
-        this.mUserID = getActivity().getSharedPreferences(getString(R.string.preference_file), Context.MODE_PRIVATE).getInt(getString(R.string.user_id_key), -1);
-        this.mCookie = getActivity().getSharedPreferences(getString(R.string.preference_file), Context.MODE_PRIVATE).getString(getString(R.string.cookie_key), "null");
+    public convListFragment(int userID, String cookie) {
+        this.mUserID = userID;
+        this.mCookie = cookie;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle onSavedInstanceState) {
-
         View v = inflater.inflate(R.layout.conv_list_fragment, container, false);
 
         listData = new ArrayList<>();
