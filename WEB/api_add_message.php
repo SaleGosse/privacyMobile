@@ -40,13 +40,22 @@
 
 			$currentDate = date('Y-m-d H:i:s', time());
 
-			// load message on server 
+			// Inserting the message in server 
 			$rq_insert_message = "INSERT INTO Message (idConversation,  idUser, content,date) VALUES (:conversationID, :userID, :content, :currentDate)";
 			$request = $db->prepare($rq_insert_message);
 			$request->bindParam(':conversationID', $conversationID, PDO::PARAM_INT);
 			$request->bindParam(':userID', $userID, PDO::PARAM_INT);
 			$request->bindParam(':content', $content, PDO::PARAM_STR);
 			$request->bindParam(':currentDate', $currentDate, PDO::PARAM_STR);
+			$request->execute();
+
+			//Updating the last date in the conv
+			$rq_update_date = "UPDATE Conversation SET lastDate = :dateDB WHERE idConversation = :conversationID";
+			$dateDB = date('d/m/Y H:i', time());
+
+			$request = $db->prepare($rq_update_date);
+			$request->bindParam(':dateDB', $dateDB, PDO::PARAM_STR);
+			$request->bindParam(':conversationID', $conversationID, PDO::PARAM_INT);
 			$request->execute();
 
 			// take id Message
@@ -60,6 +69,7 @@
 			$messageID = $request->fetch();
 			$messageID = $messageID['idMessage'];
 
+			//Get all the users in a conv
 			$rq_get_conversation_users = "SELECT idUser FROM linkConversation l WHERE l.idConversation = :conversationID AND l.idUser != :userID";
 			$request = $db->prepare($rq_get_conversation_users);
 			$request->bindParam(':conversationID', $conversationID, PDO::PARAM_INT);
@@ -68,6 +78,7 @@
 
 			$users = $request->fetchAll(PDO::FETCH_ASSOC);
 			
+			//Inserting the notification
 			$rq_add_notif = "INSERT INTO MessageStatus (idUser,idMessage,unread,notified) VALUES (:userID,:messageID,1,0)";
 			$request = $db->prepare($rq_add_notif);
 

@@ -126,7 +126,8 @@ public class Chatroom extends AppCompatActivity {
             @Override
             public void onClick(View arg0) {
                 try {
-                    sendChatMessage();
+                    if(!chatText.getText().toString().isEmpty())
+                        sendChatMessage();
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {

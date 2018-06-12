@@ -23,24 +23,25 @@
 
     <TextView
         android:id="@+id/row_message"
-        android:layout_width="262dp"
-        android:layout_height="20dp"
-        android:layout_alignLeft="@+id/row_name"
-        android:layout_alignParentBottom="true"
-        android:paddingBottom="10dp"
         android:layout_below="@+id/row_name"
         android:layout_toRightOf="@+id/row_icon"
-        android:hint="This is the content of the last message"
-        android:textSize="18px" />
+        android:layout_alignLeft="@+id/row_name"
+        android:layout_width="262dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="17dp"
+        android:hint="No message yet"
+        android:textSize="22px" />
 
 
     <TextView
         android:id="@+id/row_date"
-
-        android:layout_width="91dp"
+        android:layout_width="wrap_content"
         android:layout_height="23dp"
-        android:layout_alignParentEnd="true"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
         android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
         android:textSize="20px"
         android:textStyle="bold" />
 

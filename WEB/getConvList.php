@@ -13,7 +13,7 @@ if(isset($_POST['cookie']))
 		//Check the user id and get his convs
 		$userID = (int)$_POST['userID'];
 
-		$rq = "SELECT L.idConversation, C.convName AS name, 'content', C.lastDate AS date, IF(EXISTS(SELECT ms.idMessageStatus FROM MessageStatus ms JOIN Message m ON m.idMessage = ms.idMessage WHERE ms.idUser = L.idUser AND m.idConversation = L.idConversation AND ms.unread = 1), 'true', 'false') unread  FROM linkConversation L JOIN Conversation C ON L.idConversation = C.idConversation WHERE L.idUSer = :idUser";
+		$rq = "SELECT L.idConversation, C.convName AS name, (SELECT content FROM Message WHERE idConversation = L.idConversation ORDER BY date DESC LIMIT 1) AS content, C.lastDate AS date, IF(EXISTS(SELECT ms.idMessageStatus FROM MessageStatus ms JOIN Message m ON m.idMessage = ms.idMessage WHERE ms.idUser = L.idUser AND m.idConversation = L.idConversation AND ms.unread = 1), 'true', 'false') unread  FROM linkConversation L JOIN Conversation C ON L.idConversation = C.idConversation WHERE L.idUSer = :idUser ORDER BY C.lastDate DESC";
 
 		$dataB = connectionDB();
 
