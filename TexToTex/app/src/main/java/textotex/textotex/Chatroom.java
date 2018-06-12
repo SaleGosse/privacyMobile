@@ -2,6 +2,7 @@ package textotex.textotex;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.DataSetObserver;
 import android.net.Uri;
@@ -56,6 +57,11 @@ public class Chatroom extends AppCompatActivity {
     public  ArrayList<String> reponsesBis;
     public static final int READ_TIMEOUT=15000;
     public static final int CONNECTION_TIMEOUT=10000;
+
+    @Override
+    public void onNewIntent(Intent newIntent) {
+        this.setIntent(newIntent);
+        }
 
     @Override
     public void onCreate(Bundle savedInstanceState)

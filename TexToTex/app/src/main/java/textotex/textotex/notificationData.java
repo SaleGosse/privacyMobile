@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
@@ -39,10 +40,14 @@ public class notificationData {
 
             Intent intent = new Intent(context, Chatroom.class);
 
-            intent.putExtra("userID", mUserID);
-            intent.putExtra("conversationID", mConversationID);
+            Bundle b = new Bundle();
+            b.putInt("conversationID", this.mConversationID);
+            b.putString("conversationName", this.mConvName);
 
-            PendingIntent pIntent = PendingIntent.getActivity(context, 0, intent, 0);
+            intent.putExtra("conversationID", this.mConversationID);
+            intent.putExtra("conversationName", this.mConvName);
+
+            PendingIntent pIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT, b);
 
 // build notification
 // the addAction re-use the same intent to keep the example short
