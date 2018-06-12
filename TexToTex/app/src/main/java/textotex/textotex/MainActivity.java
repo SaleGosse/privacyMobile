@@ -1,14 +1,10 @@
 package textotex.textotex;
 
-import android.app.AlarmManager;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -58,22 +54,6 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         setCurFragment(new convListFragment(this.mUserID, this.mCookie));
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Logging out...", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putBoolean(getString(R.string.is_logged_key), false);
-                editor.apply();
-
-                finish();
-                startActivity(new Intent(MainActivity.this, MainActivity.class));
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
