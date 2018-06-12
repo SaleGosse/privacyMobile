@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
@@ -41,8 +43,6 @@ public class convListFragment extends ListFragment {
     private int mUserID;
     private String mCookie;
 
-    ProgressBar progressBar;
-
     public convListFragment(int userID, String cookie) {
         this.mUserID = userID;
         this.mCookie = cookie;
@@ -54,7 +54,14 @@ public class convListFragment extends ListFragment {
 
         listData = new ArrayList<>();
         mListView = (ListView)v.findViewById(android.R.id.list);
-      //  progressBar = (ProgressBar)v.findViewById(R.id.conv_list_progress);
+
+        FloatingActionButton fab = (FloatingActionButton) v.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         this.fetchListData();
 
