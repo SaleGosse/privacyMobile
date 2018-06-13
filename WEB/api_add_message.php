@@ -1,43 +1,37 @@
 <?php 
 	
-	include 'connectionDB.php';
+	//The function to check the cookie
+	include 'checkCookie.php';
 
-	if(isset($_POST['cookie']))
+	if(isset($_POST['userID']) && isset($_POST['cookie']))
 	{	
+		//The function to connect to the DB
+		include 'connectionDB.php';
+		
+		//Getting the POST params
+		$userID = (int)$_POST['userID'];
+		$cookie = $_POST['cookie'];
+
+		//Connection to the DB
 		$db = connectionDB();
 		
-		$cookie = (string)$_POST['cookie'];
-			
-		//The different request we'll use
-		$rq_check_cookie = "SELECT idUser FROM User WHERE cookie = :cookie AND idUser = :userID";
-
-		//Getting the POST parameters as variables
-		$conversationID = (int)$_POST['conversationID'];
-		$content = $_POST["content"];
-		$userID = (int)$_POST["userID"];
-		
-		//Checking the cookie, we're never too sure.
-		$request = $db->prepare($rq_check_cookie);
-		$request->bindParam(':cookie', $cookie, PDO::PARAM_STR);
-		$request->bindParam(':userID', $userID, PDO::PARAM_INT);
-		$request->execute();
-		$result = $request->fetch();
-
-		if(!$result)
+		if(!checkCookie($db, $userID, $cookie))
 		{
-			echo "false\n";
-			echo "error: Invalid cookie.\n";
-		
-			$db = null;
+			//Printing the error
+			echo "false\n" . "error: Invalid cookie.\n";
 
-			//Exiting
+			//Closing the db and exiting
+			$dataB = null;
 			exit();
 		}
 		
-		if(isset($_POST['content']) && isset($_POST['userID']) && isset($_POST['conversationID']))
+		if(isset($_POST['content']) && isset($_POST['conversationID']))
 		{
-			
+			//Getting the POST params
+			$content = $_POST['content'];
+			$conversationID = $_POST['conversationID'];
 
+			//The current date in an accurate format
 			$currentDate = date('Y-m-d H:i:s', time());
 
 			// Inserting the message in server 

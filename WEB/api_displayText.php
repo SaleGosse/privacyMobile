@@ -1,21 +1,30 @@
 <?php
 	
-	include 'connectionDB.php';
+	include 'checkCookie.php';
 
-
-	if(isset($_POST['cookie']))
+	if(isset($_POST['userID']) && isset($_POST['cookie']))
 	{
-		//Check the cookie
+		include 'connectionDB.php';
 
-		//Now we can get the messages
-		if(isset($_POST['userID']) && isset($_POST['conversationID'])) 
-		{
+		//Getting the POST params
+		$idUserSource = (int)$_POST["userID"];	
+		$cookie = $_POST['cookie'];
+
+		$dataBase =  connectionDB();
 		
-			$dataBase =  connectionDB();
+		if(!checkCookie($dataBase, $idUserSource, $cookie))
+		{
+			//Printing the error
+			echo "false\n" . "error: Invalid cookie.\n";
 
-			// define username,password with post 
-			
-			$idUserSource = (int)$_POST["userID"];
+			//Closing the db and exiting
+			$dataBase = null;
+			exit();
+		}
+		
+		//Now we can get the messages
+		if(isset($_POST['conversationID'])) 
+		{
 			$idConversation = (int)$_POST['conversationID'];
 
 			$resultConv = $dataBase->prepare("SELECT m.idUser,lastName,firstName,m.content,m.date,m.idMessage FROM Message m Left JOIN (SELECT idUser FROM linkConversation WHERE idConversation = :idConversation ) c ON m.idUser = c.idUSer JOIN Profile p  ON m.idUser = p.idUser WHERE idConversation = :idConversation ORDER BY m.date ASC");

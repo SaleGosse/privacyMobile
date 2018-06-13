@@ -1,21 +1,28 @@
 <?php
+	
+	include 'checkCookie.php';
 
-include 'connectionDB.php';
-
-
-if(isset($_POST['cookie']))
-{
-	//Check the cookie
-	$cookie = $_POST['cookie'];
-
-	if(isset($_POST['userID']))
+	if(isset($_POST['userID']) && isset($_POST['cookie']))
 	{
-		//Check the user id and get his convs
+		include 'connectionDB.php';
+		//Check the cookie
 		$userID = (int)$_POST['userID'];
-
-		$rq = "SELECT L.idConversation, C.convName AS name, (SELECT content FROM Message WHERE idConversation = L.idConversation ORDER BY date DESC LIMIT 1) AS content, C.lastDate AS date, IF(EXISTS(SELECT ms.idMessageStatus FROM MessageStatus ms JOIN Message m ON m.idMessage = ms.idMessage WHERE ms.idUser = L.idUser AND m.idConversation = L.idConversation AND ms.unread = 1), 'true', 'false') unread  FROM linkConversation L JOIN Conversation C ON L.idConversation = C.idConversation WHERE L.idUSer = :idUser ORDER BY C.lastDate DESC";
+		$cookie = $_POST['cookie'];
 
 		$dataB = connectionDB();
+		
+		if(!checkCookie($dataB, $userID, $cookie))
+		{
+			//Printing the error
+			echo "false\n" . "error: Invalid cookie.\n";
+
+			//Closing the db and exiting
+			$dataB = null;
+			exit();
+		}
+
+		//Check the user id and get his convs
+		$rq = "SELECT L.idConversation, C.convName AS name, (SELECT content FROM Message WHERE idConversation = L.idConversation ORDER BY date DESC LIMIT 1) AS content, C.lastDate AS date, IF(EXISTS(SELECT ms.idMessageStatus FROM MessageStatus ms JOIN Message m ON m.idMessage = ms.idMessage WHERE ms.idUser = L.idUser AND m.idConversation = L.idConversation AND ms.unread = 1), 'true', 'false') unread  FROM linkConversation L JOIN Conversation C ON L.idConversation = C.idConversation WHERE L.idUSer = :idUser ORDER BY C.lastDate DESC";
 
 		$request = $dataB->prepare($rq);
 		$request->bindParam(":idUser", $userID, PDO::PARAM_INT);
@@ -25,16 +32,7 @@ if(isset($_POST['cookie']))
 		$result = $request->fetchAll();
 
 		echo json_encode($result) . "\n";
-
-		exit();
-
 	}
-	else
-		echo "false" . "\n" . "error: Invalid or missing user ID.";
-}
-else
-	echo "false" . "\n" . "error: Invalid or missing cookie.";
-
-
+	echo "false\n" . "error: Missing POST parameters.\n";
 
 ?>
