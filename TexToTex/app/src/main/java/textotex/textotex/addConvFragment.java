@@ -26,7 +26,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class addConvFragment extends Fragment {
+public class addConvFragment extends Fragment
+{
     private EditText mUsernameView;
 
     public addConvFragment(){
