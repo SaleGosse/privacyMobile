@@ -21,7 +21,7 @@
 			echo "false\n" . "error: Invalid cookie.\n";
 
 			//Closing the db and exiting
-			$dataB = null;
+			$db = null;
 			exit();
 		}
 		
