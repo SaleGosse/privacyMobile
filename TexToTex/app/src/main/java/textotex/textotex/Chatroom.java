@@ -15,8 +15,16 @@ import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,7 +43,10 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 import java.util.concurrent.ExecutionException;
 
 public class Chatroom extends AppCompatActivity {
@@ -43,18 +54,25 @@ public class Chatroom extends AppCompatActivity {
     private ListView listView;
     private EditText chatText;
     private Button buttonSend;
+    private RelativeLayout invitation;
     private boolean side = false;
     private cookieManager cm;
+
     private int conversationID = -1;
-    public int userID = 0;
+    private int userID = -1;
+    private int invitationID = -1;
+    private String fromFirstName;
+    private String fromLastName;
+    private String fromLogin;
+
     public  JSONArray jsonArray ;
     public String chatName;
     private String cookie;
-    public String urlDisplay;
     public  TextView txt;
     public String messageNow;
     public static List<List<String>> reponses ;
-    public  ArrayList<String> reponsesBis;
+    public int type;
+
     public static final int READ_TIMEOUT=15000;
     public static final int CONNECTION_TIMEOUT=10000;
 
@@ -77,6 +95,10 @@ public class Chatroom extends AppCompatActivity {
         buttonSend =  findViewById(R.id.send);
 
         listView =  findViewById(R.id.msgview);
+
+        invitation = findViewById(R.id.invitation);
+
+        invitation.setVisibility(View.GONE);
 
         conversationID = getIntent().getIntExtra("conversationID", -1);
         chatName = getIntent().getStringExtra("conversationName");
@@ -152,42 +174,68 @@ public class Chatroom extends AppCompatActivity {
     private void getUserInfo () throws ExecutionException, InterruptedException, JSONException  {
         AsyncTask toto = new getUsers().execute();
         String result = (String) toto.get();
-        try {
-            jsonArray = new JSONArray(result.trim());
 
-            JSONObject ouimaisnon = null;
-
-            reponsesBis = new ArrayList<String>(result.length());
-            reponses = new ArrayList<List<String>>();
-
-            for (int i = 0; i < jsonArray.length(); i++)
-            {
-                try {
-                    reponses.add(i,new ArrayList<String>(1));
-                    ouimaisnon = jsonArray.getJSONObject(i);
-
-                    if(userID == Integer.valueOf(ouimaisnon.getString("idUser")))
-                    {
-                        String name = ouimaisnon.getString("lastName") + " " + ouimaisnon.getString("firstName");
-                        boolean a = sendMessageSide(true, ouimaisnon.getString("content"),ouimaisnon.getString("date"),name);
-                    }
-                    else {
-                        String name = ouimaisnon.getString("lastName") + " " + ouimaisnon.getString("firstName");
-                        boolean a = sendMessageSide(false, ouimaisnon.getString("content"), ouimaisnon.getString("date"), name);
-                    }
-
-                }
-                catch (JSONException e)
-                {
-                    e.printStackTrace();
-                }
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        if (jsonArray != null)
+        if(type == 1)
         {
+            try {
+                jsonArray = new JSONArray(result.trim());
+
+                JSONObject obj = null;
+
+                reponses = new ArrayList<List<String>>();
+
+                for (int i = 0; i < jsonArray.length(); i++)
+                {
+                    try {
+                        reponses.add(i,new ArrayList<String>(1));
+                        obj = jsonArray.getJSONObject(i);
+
+                        sendMessageSide((userID == Integer.valueOf(obj.getString("idUser"))) ? true : false, obj.getString("content"), obj.getString("date"),obj.getString("lastName") + " " + obj.getString("firstName"));
+                    }
+                    catch (JSONException e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            if (jsonArray != null)
+            {
+            }
         }
+        else if(type == 2)
+        {
+            String content = fromFirstName + " " + fromLastName + " (" + fromLogin + ") wants to chat with you !";
+            ((TextView)invitation.findViewById(R.id.invitation_text)).setText(content);
+
+            ((Button)invitation.findViewById(R.id.bt_accept)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    acceptInvitation(invitationID);
+                }
+            });
+
+            ((Button)invitation.findViewById(R.id.bt_decline)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    declineInvitation(invitationID);
+
+                    Chatroom.this.finish();
+                    Intent newIntent = new Intent(Chatroom.this, convListFragment.class);
+                }
+            });
+
+            invitation.setVisibility(View.VISIBLE);
+            chatText.setEnabled(false);
+            buttonSend.setEnabled(false);
+        }
+        else if(type == 3)
+        {
+            txt.setEnabled(false);
+            buttonSend.setEnabled(false);
+        }
+
     }
 
     private class getUsers extends AsyncTask<String, String, String>
@@ -260,12 +308,28 @@ public class Chatroom extends AppCompatActivity {
                 String line;
 
                 while ((line = reader.readLine()) != null) {
-                    if(line.compareTo("true") == 0)
+                    if(line.contains("true"))
                         continue;
-                    else if(line.compareTo("false") == 0)
+                    else if(line.contains("false"))
                     {
+                        type = -1;
                         //TODO: Parse and print the error.
-                        continue;
+                        return "Internal error.";
+                    }
+                    else if(line.contains("type: "))
+                        type = Integer.valueOf(line.substring(line.indexOf("type: ") + "type: ".length()));
+                    else if(line.contains("invitationID: "))
+                        invitationID = Integer.valueOf(line.substring(line.indexOf("invitationID: ") + "invitationID: ".length()));
+                    else if(line.contains("firstName: "))
+                        fromFirstName = line.substring(line.indexOf("firstName: ") + "firstName: ".length());
+                    else if(line.contains("lastName: "))
+                        fromLastName = line.substring(line.indexOf("lastName: ") + "lastName: ".length());
+                    else if(line.contains("login: "))
+                        fromLogin = line.substring(line.indexOf("login: ") + "login: ".length());
+                    else if(line.contains("error: "))
+                    {
+                        String error_txt = line.substring(line.indexOf("error: ") + "error: ".length());
+                        Toast.makeText(Chatroom.this, error_txt, Toast.LENGTH_LONG).show();
                     }
                     else
                         result.append(line + "\n");
@@ -395,27 +459,20 @@ public class Chatroom extends AppCompatActivity {
             //Parsing the result string
             if(result.contains("true"))
             {
-                Toast.makeText(Chatroom.this, "Sent", Toast.LENGTH_LONG);
+                Toast.makeText(Chatroom.this, "Sent", Toast.LENGTH_LONG).show();
             }
-            else if(result.contains("false"))
+            else if (result.contains("error: "))
             {
-                if(result.contains("error: "))
-                {
                     String error_txt = result.substring(result.indexOf("error: ") + "error: ".length());
 
-                    Toast.makeText(Chatroom.this, error_txt, Toast.LENGTH_LONG);
+                    Toast.makeText(Chatroom.this, error_txt, Toast.LENGTH_LONG).show();
 
-                    if(error_txt.contains("cookie"))
-                    {
+                    if (error_txt.contains("cookie")) {
                         Chatroom.this.cm.checkSession();
                     }
-                }
-                else
-                {
-                    Toast.makeText(Chatroom.this, "Internal error..", Toast.LENGTH_LONG);
-                }
             }
-
+            else
+                Toast.makeText(Chatroom.this, "Internal error..", Toast.LENGTH_LONG).show();
         }
 
     }
@@ -440,6 +497,92 @@ public class Chatroom extends AppCompatActivity {
         return pside;
     }
 
+    private void acceptInvitation(final int invitationID)
+    {
+        SecureClass sClass = new SecureClass(this, this.getSharedPreferences(getString(R.string.preference_file), Context.MODE_PRIVATE));
+        sClass.newRSAKey(conversationID);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, getString(R.string.url_base) + getString(R.string.url_respond_invit),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                     }
+                }){
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("cookie", cookie);
+                params.put("userID", Integer.toString(userID));
+                params.put("invitationID", Integer.toString(invitationID));
+                params.put("action:", "accept");
+
+                return params;
+            }
+        };
+
+        RequestQueue queue = Volley.newRequestQueue(Chatroom.this);
+
+        queue.add(stringRequest);
+    }
+
+    private void declineInvitation(final int invitationID)
+    {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, getString(R.string.url_base) + getString(R.string.url_respond_invit),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Scanner reader = new Scanner(response);
+                        boolean success = false;
+                        String error_txt = "Internal error.";
+
+                        while (reader.hasNextLine())
+                        {
+                            String line = reader.nextLine();
+                            if(line.contains("true"))
+                                success = true;
+                            else if(line.contains("false"))
+                            {
+                                success = false;
+                            }
+                            else if (line.contains("error: "))
+                                error_txt = line.substring(line.indexOf("error: ") + "error: ".length());
+                        }
+
+                        if(!success)
+                            Toast.makeText(Chatroom.this, error_txt, Toast.LENGTH_LONG).show();
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                }){
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("userID", Integer.toString(userID));
+                params.put("cookie", cookie);
+                params.put("conversationID", Integer.toString(conversationID));
+                params.put("invitationID", Integer.toString(invitationID));
+                params.put("action", "decline");
+
+                return params;
+            }
+        };
+
+        RequestQueue queue = Volley.newRequestQueue(Chatroom.this);
+
+        queue.add(stringRequest);
+    }
 }
 
 

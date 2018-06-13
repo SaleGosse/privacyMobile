@@ -22,6 +22,10 @@ import com.android.volley.toolbox.Volley;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.security.Key;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.interfaces.RSAPublicKey;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -64,79 +68,93 @@ public class addConvFragment extends Fragment
         final String mTargetUsername = ((EditText) getActivity().findViewById(R.id.add_conv_username)).getText().toString();
         final String mConvName = ((EditText) getActivity().findViewById(R.id.add_conv_convName)).getText().toString();
 
-        final RequestQueue mQueue = Volley.newRequestQueue(getContext());
+        try
+        {
+            final KeyPair kp = KeyPairGenerator.getInstance("RSA").generateKeyPair();
 
-        mQueue.addRequestFinishedListener(new RequestQueue.RequestFinishedListener<Object>() {
-            @Override
-            public void onRequestFinished(Request<Object> request) {
-            }
-        });
+            final RequestQueue mQueue = Volley.newRequestQueue(getContext());
 
-        //The request..
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, getString(R.string.url_base) + getString(R.string.url_start_conv),
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        if(response.contains("true")){
-                            //Call fab's conv list with the id of the conv or smthq
-                            int conversationID = -1;
-                            String pubkey;
+            mQueue.addRequestFinishedListener(new RequestQueue.RequestFinishedListener<Object>() {
+                @Override
+                public void onRequestFinished(Request<Object> request) {
+                }
+            });
 
-                            Scanner reader = new Scanner(response);
+            //The request..
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, getString(R.string.url_base) + getString(R.string.url_start_conv),
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            if(response.contains("true")){
+                                //Call fab's conv list with the id of the conv or smthq
+                                int conversationID = -1;
+                                String pubkey;
 
-                            while(reader.hasNextLine())
-                            {
-                                String line = reader.nextLine();
+                                Scanner reader = new Scanner(response);
 
-                                if(line.contains("true"))
-                                    continue;
-                                else if(line.contains("convID: "))
-                                    conversationID = Integer.parseInt(line.substring(line.indexOf("convID: ") + "convID: ".length()));
-                                else if(line.contains("pubkey: "))
-                                    pubkey = line.substring(line.indexOf("pubkey: ") + "pubkey: ".length());
+                                while(reader.hasNextLine())
+                                {
+                                    String line = reader.nextLine();
+
+                                    if(line.contains("true"))
+                                        continue;
+                                    else if(line.contains("convID: "))
+                                        conversationID = Integer.parseInt(line.substring(line.indexOf("convID: ") + "convID: ".length()));
+                                }
+
+                                ((MainActivity)getActivity()).mSClass.insertKeys(conversationID, kp);
+
+                                getActivity().finish();
+
+                                Intent newIntent = new Intent(getContext(), Chatroom.class);
+                                newIntent.putExtra("conversationID", conversationID);
+                                newIntent.putExtra("convName", mConvName);
+
+                                startActivity(newIntent);
+
+                                Toast.makeText(getActivity(), getActivity().getString(R.string.invite_success), Toast.LENGTH_LONG).show();
+                            }
+                            else if (response.contains("false")) {
+                                //Put invalid username error prompt
+                                if(response.contains("error: "))
+                                {
+                                    String error_txt = response.substring(response.indexOf("error: ") + "error: ".length());
+
+                                    Toast.makeText(getActivity(), error_txt, Toast.LENGTH_LONG).show();
+                                }
+                                else
+                                    Toast.makeText(getActivity(), "Internal error.", Toast.LENGTH_LONG).show();
+
                             }
 
-                            Intent newIntent = new Intent(getContext(), Chatroom.class);
-                            newIntent.putExtra("conversationID", conversationID);
-                            newIntent.putExtra("convName", mConvName);
-
-                            startActivity(newIntent);
-                            Toast.makeText(getActivity(), getActivity().getString(R.string.invite_success), Toast.LENGTH_LONG).show();
-
                         }
-                        else if (response.contains("false")) {
-                            //Put invalid username error prompt
-                            if(response.contains("error: "))
-                            {
-                                String error_txt = response.substring(response.indexOf("error: ") + "error: ".length());
-
-                                Toast.makeText(getActivity(), error_txt, Toast.LENGTH_LONG).show();
-                            }
-                            else
-                                Toast.makeText(getActivity(), "Internal error.", Toast.LENGTH_LONG).show();
-
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            //put connection problem or smth
                         }
+                    }) {
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("userID", Integer.toString(mUserID));
+                    params.put("cookie", mCookie);
+                    params.put("target", mTargetUsername);
+                    params.put("convName", mConvName);
+                    params.put("modulus", ((RSAPublicKey)kp.getPublic()).getModulus().toString());
+                    params.put("exponent", ((RSAPublicKey)kp.getPublic()).getPublicExponent().toString());
 
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //put connection problem or smth
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("userID", Integer.toString(mUserID));
-                params.put("cookie", mCookie);
-                params.put("target", mTargetUsername);
-                params.put("convName", mConvName);
-                return params;
-            }
+                    return params;
+                }
+            };
+            mQueue.add(stringRequest);
 
-        };
-        mQueue.add(stringRequest);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
 

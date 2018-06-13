@@ -12,15 +12,15 @@ public class SecureClass extends SQLiteOpenHelper {
 
     private SQLiteDatabase database;
     private static SharedPreferences mSharedPref;
+    private final int mUserID;
     public static final String  DATABASE_NAME = "hashDB";
     public static final int     DATABASE_VERSION = 5;
 
 
     public SecureClass(Context context, SharedPreferences sharedPref) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        mSharedPref = sharedPref;
-
-        this.newRSAKey(1);
+        this.mSharedPref = sharedPref;
+        this.mUserID = this.mSharedPref.getInt(context.getString(R.string.user_id_key), -1);
     }
 
     @Override
@@ -32,9 +32,6 @@ public class SecureClass extends SQLiteOpenHelper {
 
         database.execSQL(rq1);
         database.execSQL(rq2);
-
-        this.newRSAKey(1);
-
     }
 
     @Override
@@ -48,21 +45,27 @@ public class SecureClass extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void newRSAKey(int idConversation) {
+    public void newRSAKey(int conversationID) {
 
         try {
             final KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
             KeyPair kp = generator.generateKeyPair();
 
-            String test = "  s";
-
+            this.insertKeys(conversationID, kp);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    //
+    public void insertKeys(int conversationID, KeyPair kp)
+    {
+        String rq_insert_public = "INSERT INTO PublicKeys (idUser, pub_key) VALUES (" + Integer.toString(this.mUserID) + ", " + kp.getPublic() + ")";
+        String rq_insert_private = "INSERT INTO AESKeys (idConversation, priv_key) VALUES (" + Integer.toString(conversationID) + kp.getPrivate() + ")";
 
+        database.execSQL(rq_insert_public);
+        database.execSQL(rq_insert_private);
+
+    }
 }
 
 
