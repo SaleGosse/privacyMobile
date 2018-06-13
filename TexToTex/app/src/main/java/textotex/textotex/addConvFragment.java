@@ -20,8 +20,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class addConvFragment extends Fragment {
     private EditText mUsernameView;
@@ -32,7 +35,7 @@ public class addConvFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle onSavedInstanceState){
-        View rootView = inflater.inflate(R.layout.add_conv_fragment, container, false);
+        final View rootView = inflater.inflate(R.layout.add_conv_fragment, container, false);
 
         mUsernameView = rootView.findViewById(R.id.add_conv_username);
 
@@ -42,7 +45,8 @@ public class addConvFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                attemptAddConv();
+                if(!((EditText)rootView.findViewById(R.id.add_conv_username)).getText().toString().isEmpty() && !((EditText)rootView.findViewById(R.id.add_conv_convName)).getText().toString().isEmpty())
+                    attemptAddConv();
             }
         });
 
@@ -53,10 +57,11 @@ public class addConvFragment extends Fragment {
 
         final SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.preference_file), Context.MODE_PRIVATE);
 
-        final String mUsername = sharedPref.getString(getString(R.string.login_key), "null");
+        final int mUserID = sharedPref.getInt(getString(R.string.user_id_key), -1);
         final String mCookie = sharedPref.getString(getString(R.string.cookie_key), "null");
 
         final String mTargetUsername = ((EditText) getActivity().findViewById(R.id.add_conv_username)).getText().toString();
+        final String mConvName = ((EditText) getActivity().findViewById(R.id.add_conv_convName)).getText().toString();
 
         final RequestQueue mQueue = Volley.newRequestQueue(getContext());
 
@@ -72,23 +77,42 @@ public class addConvFragment extends Fragment {
                     @Override
                     public void onResponse(String response) {
                         if(response.contains("true")){
-                            //Call fab's conv list with the id of the conv or smth
+                            //Call fab's conv list with the id of the conv or smthq
+                            int conversationID = -1;
+                            String pubkey;
 
-                            //Intent convActivity = new Intent(getContext(), chatRoom().class);
-                            //convActivity.putExtra("idConversation", );
+                            Scanner reader = new Scanner(response);
 
-                            //startActivity(convÀctivity);
-                            Toast.makeText(getActivity(), response, Toast.LENGTH_LONG).show();
+                            while(reader.hasNextLine())
+                            {
+                                String line = reader.nextLine();
+
+                                if(line.contains("true"))
+                                    continue;
+                                else if(line.contains("convID: "))
+                                    conversationID = Integer.parseInt(line.substring(line.indexOf("convID: ") + "convID: ".length()));
+                                else if(line.contains("pubkey: "))
+                                    pubkey = line.substring(line.indexOf("pubkey: ") + "pubkey: ".length());
+                            }
+
+                            Intent newIntent = new Intent(getContext(), Chatroom.class);
+                            newIntent.putExtra("conversationID", conversationID);
+                            newIntent.putExtra("convName", mConvName);
+
+                            startActivity(newIntent);
+                            Toast.makeText(getActivity(), getActivity().getString(R.string.invite_success), Toast.LENGTH_LONG).show();
 
                         }
                         else if (response.contains("false")) {
                             //Put invalid username error prompt
-                            String line = "";
-                            String error_txt = "";
+                            if(response.contains("error: "))
+                            {
+                                String error_txt = response.substring(response.indexOf("error: ") + "error: ".length());
 
-                            error_txt = response.substring(response.indexOf("false") + 6);
-
-                            Toast.makeText(getActivity(), error_txt, Toast.LENGTH_LONG).show();
+                                Toast.makeText(getActivity(), error_txt, Toast.LENGTH_LONG).show();
+                            }
+                            else
+                                Toast.makeText(getActivity(), "Internal error.", Toast.LENGTH_LONG).show();
 
                         }
 
@@ -103,9 +127,10 @@ public class addConvFragment extends Fragment {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("login", mUsername);
+                params.put("userID", Integer.toString(mUserID));
                 params.put("cookie", mCookie);
                 params.put("target", mTargetUsername);
+                params.put("convName", mConvName);
                 return params;
             }
 
