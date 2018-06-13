@@ -7,46 +7,66 @@
 		include 'connectionDB.php';
 
 		//Getting the POST params
-		$idUserSource = (int)$_POST["userID"];	
-		$cookie = $_POST['cookie'];
+		$userID = (int)$_POST["userID"];	
+		$cookie = (string)$_POST['cookie'];
 
 		$dataBase =  connectionDB();
 		
-		if(!checkCookie($dataBase, $idUserSource, $cookie))
+		if(!checkCookie($dataBase, $userID, $cookie))
 		{
 			//Printing the error
-			echo "false\n" . "error: Invalid cookie.\n";
+			echo "error: Invalid cookie.\n";
 
 			//Closing the db and exiting
 			$dataBase = null;
 			exit();
 		}
-		
+
 		//Now we can get the messages
 		if(isset($_POST['conversationID'])) 
 		{
-			$idConversation = (int)$_POST['conversationID'];
+			$conversationID = $_POST['conversationID'];
 
-			$resultConv = $dataBase->prepare("SELECT m.idUser,lastName,firstName,m.content,m.date,m.idMessage FROM Message m Left JOIN (SELECT idUser FROM linkConversation WHERE idConversation = :idConversation ) c ON m.idUser = c.idUSer JOIN Profile p  ON m.idUser = p.idUser WHERE idConversation = :idConversation ORDER BY m.date ASC");
+			//Check if it's an invitation
+			$rq_check_invit = "SELECT i.idInvitation,p.firstName,p.lastName,u.login FROM Invitation i LEFT JOIN Profile p ON p.idUser = i.idUser JOIN User u ON p.idUser = u.idUser WHERE i.idTarget = :userID AND i.idConversation = :conversationID AND isOK = 0";
+			$request = $dataBase->prepare($rq_check_invit);
+			$request->bindParam(":userID", $userID, PDO::PARAM_INT);
+			$request->bindParam(":conversationID", $conversationID, PDO::PARAM_INT);
+			$request->execute();
+
+			$invitation = $request->fetch();
+
+			if(!empty($invitation))
+			{
+				echo "true\n" . "type: 2\n" . 
+					"invitationID: " . $invitation['idInvitation'] . "\n" .
+					"firstName: " . $invitation['firstName'] . "\n" .
+					"lastName: " . $invitation['lastName'] . "\n" .
+					"login: " . $invitation['login'] . "\n";
+
+				$dataBase = null;
+
+				exit();
+			}
+
+			//Else, get the messages
+			$rq_get_msg = "SELECT m.idUser,lastName,firstName,m.content,m.date,m.idMessage FROM Message m Left JOIN (SELECT idUser FROM linkConversation WHERE idConversation = :idConversation ) c ON m.idUser = c.idUSer JOIN Profile p  ON m.idUser = p.idUser WHERE idConversation = :idConversation ORDER BY m.date ASC";
+			$resultConv = $dataBase->prepare($rq_get_msg);
 			$resultConv->bindParam(':idConversation', $idConversation, PDO::PARAM_INT);
 			$resultConv->execute();
 			$resultMessage = $resultConv->fetchAll(PDO::FETCH_ASSOC);
 
-			$rq_update_unread = "DELETE FROM MessageStatus WHERE idMessageStatus IN (SELECT idMessageStatus FROM (SELECT ms.idMessageStatus FROM MessageStatus ms JOIN Message m ON ms.idMessage = m.idMessage WHERE m.idConversation = :conversationID) subquery)";
+			$rq_update_unread = "DELETE FROM MessageStatus WHERE idMessageStatus IN (SELECT idMessageStatus FROM (SELECT ms.idMessageStatus FROM MessageStatus ms JOIN Message m ON ms.idMessage = m.idMessage WHERE m.idConversation = :conversationID AND m.idUser = :userID) subquery)";
 
 			$request = $dataBase->prepare($rq_update_unread);
 			$request->bindParam(':conversationID', $idConversation, PDO::PARAM_INT);
+			$request->bindParam(':userID', $userID, PDO::PARAM_INT);
 			$request->execute();
 
-
+			echo "true\n" . "type: 1\n";
 			if(!empty($resultMessage))	
 			{			
-				echo "true" . "\n" . json_encode($resultMessage) . "\n";
-			}
-			else
-			{
-				$dataBase = null;   // Disconnect
-				exit ();
+				echo json_encode($resultMessage) . "\n";
 			}
 		}
 		else

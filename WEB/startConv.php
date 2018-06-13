@@ -19,10 +19,12 @@
 			exit();
 		}
 
-		if(isset($_POST["target"]) && isset($_POST["convName"]))
+		if(isset($_POST["target"]) && isset($_POST["convName"]) && isset($_POST["modulus"]) && isset($_POST["exponent"]))
 		{
 			$targetLogin = $_POST["target"];
 			$convName = $_POST["convName"];
+			$modulus = $_POST["modulus"];
+			$exponent = $_POST["exponent"];
 
 			//Check if user exists
 			$rq_check_user = "SELECT idUser FROM User WHERE User.login = :target";
@@ -36,7 +38,7 @@
 			//If we didnt find the user
 			if(!$result)
 			{
-				echo "false\n" . "error: User" . $targetLogin . " doesn't exist.";
+				echo "false\n" . "error: User " . $targetLogin . " doesn't exist.";
 
 				$dataB = null;
 				
@@ -77,12 +79,13 @@
 			$lastDate = date('d/m/Y H:i', time());
 
 			//Creating the conversation
-			$rq_insert_conv = "INSERT INTO Conversation (convName, creationDate, lastDate) VALUES (:convName, :creationDate, :lastDate)";
+			$rq_insert_conv = "INSERT INTO Conversation (convName, creationDate, lastDate, exponent) VALUES (:convName, :creationDate, :lastDate, :exponent)";
 
 			$request = $dataB->prepare($rq_insert_conv);
 			$request->bindParam(":convName", $convName, PDO::PARAM_STR);
 			$request->bindParam(":creationDate", $creationDate, PDO::PARAM_STR);
 			$request->bindParam(":lastDate", $lastDate, PDO::PARAM_STR);
+			$request->bindParam(":exponent", $exponent, PDO::PARAM_STR);
 
 			$request->execute();
 
@@ -101,7 +104,7 @@
 			$convID = $convID['idConversation'];
 
 			//Adding the links for this conversation
-			$rq_insert_link = "INSERT INTO linkConversation (idUser, idConversation) VALUES (:userID, :conversationID)";
+			$rq_insert_link = "INSERT INTO linkConversation (idUser, idConversation, modulus) VALUES (:userID, :conversationID, :modulus)";
 
 			//Creating the request, we'll use it twice
 			$request = $dataB->prepare($rq_insert_link);
@@ -109,19 +112,22 @@
 			
 			//For us
 			$request->bindParam(":userID", $userID, PDO::PARAM_INT);
+			$request->bindParam(":modulus", $modulus, PDO::PARAM_STR);
 			$request->execute();
 
 			//For the target
+			$modulus = "";
 			$request->bindParam(":userID", $targetID, PDO::PARAM_INT);
+			$request->bindParam(":modulus", $modulus, PDO::PARAM_STR);
 			$request->execute();
 
 			//Inserting the invitation
-			$rq_insert_invit = "INSERT INTO Invitation (idUser,idConversation,isOK) VALUES (:userID, :conversationID, 0)";
+			$rq_insert_invit = "INSERT INTO Invitation (idUser,idConversation,isOK,idTarget) VALUES (:userID, :conversationID, 0, :targetID)";
 
 			$request = $dataB->prepare($rq_insert_invit);
 			$request->bindParam(":userID", $userID, PDO::PARAM_INT);
 			$request->bindParam(":conversationID", $convID, PDO::PARAM_INT);
-
+			$request->bindParam(":targetID", $targetID, PDO::PARAM_INT);
 			$request->execute();
 
 			echo "true\n";

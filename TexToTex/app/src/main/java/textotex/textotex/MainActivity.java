@@ -25,24 +25,24 @@ public class MainActivity extends AppCompatActivity
 
     private int mCurFragment = 0;
     private Context mContext;
-    private SecureClass sClass;
     private int mUserID;
     private String mCookie;
 
-    private cookieManager cm;
+    public cookieManager mCM;
+    public SecureClass mSClass;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         this.mContext = this;
 
-        cm = new cookieManager(this);
+        mCM = new cookieManager(this);
 
-        cm.checkSession();
+        mCM.checkSession();
 
         final SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(getString(R.string.preference_file), Context.MODE_PRIVATE);
 
-        sClass = new SecureClass(this, sharedPref);
+        mSClass = new SecureClass(this, sharedPref);
 
         this.mUserID = sharedPref.getInt(getString(R.string.user_id_key), -1);
         this.mCookie = sharedPref.getString(getString(R.string.cookie_key), "null");
