@@ -19,6 +19,7 @@
         android:background="@android:color/darker_gray">
     </ListView>
 
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
@@ -28,6 +29,8 @@
         android:layout_margin="@dimen/fab_margin"
         android:clickable="true"
         android:elevation="4dp"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:background="@drawable/buttonstyle"
+        android:color="@color/startblue"
+        app:srcCompat="@drawable/ic_person_white_24dp" />
 
 </RelativeLayout>

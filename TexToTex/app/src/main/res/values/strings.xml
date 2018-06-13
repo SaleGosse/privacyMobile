@@ -54,5 +54,7 @@
     <string name="url_check_message" translatable="false">api_check_message.php</string>
     <string name="url_create_account" translatable="false">api_create_account.php</string>
     <string name="url_getInfoUser" translatable="false">getInfoUser.php</string>
+    <string name="show_popup">show popup</string>
+    <string name="url_addFriend" translatable="false" >api_addFriend.php</string>
 
 </resources>
