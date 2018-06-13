@@ -28,7 +28,7 @@ public class SecureClass extends SQLiteOpenHelper {
         final String rq1 = "CREATE TABLE IF NOT EXISTS PublicKeys(idPubKey INTEGER NOT NULL AUTOINCREMENT, idUser INTEGER NOT NULL, pub_key TEXT);";
         final String rq2 = "CREATE TABLE IF NOT EXISTS AESKeys (idAESKey INTEGER NOT NULL AUTOINCREMENT, idConversation INTEGER NOT NULL, private_key TEXT, aes_key TEXT NOT NULL);";
 
-     //   database = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
+        database = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
 
         database.execSQL(rq1);
         database.execSQL(rq2);

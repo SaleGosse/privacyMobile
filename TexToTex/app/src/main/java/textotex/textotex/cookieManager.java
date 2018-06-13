@@ -54,9 +54,10 @@ public class cookieManager {
         }
 
         //Getting the login, if no, same
-        final String login = mSharedPref.getString(mActivity.getString(R.string.login_key), "null");
-        if(login.compareTo("null") == 0){
+        final int userID = mSharedPref.getInt(mActivity.getString(R.string.user_id_key), -1);
+        if(userID == -1){
             mEditor.putString(mActivity.getString(R.string.cookie_key), "null");
+            mEditor.putInt(mActivity.getString(R.string.user_id_key), -1);
             mEditor.commit();
 
             this.callLogin();
@@ -109,7 +110,7 @@ public class cookieManager {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
 
-                params.put("login", login);
+                params.put("userID", Integer.toString(userID));
                 params.put("cookie", cookie);
 
                 return params;

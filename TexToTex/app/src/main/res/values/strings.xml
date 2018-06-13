@@ -17,10 +17,15 @@
 
     <!-- Strings related to add conv fragment -->
     <string name="bt_start_conv">Start</string>
+    <string name="bt_accept">Accept</string>
+    <string name="bt_decline">Decline</string>
 
+    <string name="invite_success" translatable="true">Invitation sent.</string>
     <!-- Strings related to login -->
     <string name="prompt_username">Username</string>
     <string name="prompt_password">Password</string>
+    <string name="prompt_convName">Conversation Name</string>
+
     <string name="action_sign_in">Sign in !</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_xss">GTFO Haxer !</string>
@@ -40,7 +45,7 @@
     <string name="url_base">http://10.105.249.0:8000/</string>
 
     <string name="url_login" translatable="false">login.php</string>
-    <string name="url_check_cookie" translatable="false">checkCookie.php</string>
+    <string name="url_check_cookie" translatable="false">api_check_cookie.php</string>
     <string name="url_conv_list" translatable="false">getConvList.php</string>
     <string name="url_start_conv" translatable="false">startConv.php</string>
     <string name="url_display_text" translatable="false">api_displayText.php</string>

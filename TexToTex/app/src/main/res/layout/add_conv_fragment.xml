@@ -12,25 +12,35 @@
         <LinearLayout
             android:id="@+id/add_conv_form"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
+            android:layout_height="wrap_content"
+            android:padding="30dp"
+            android:layout_margin="20dp"
+            android:background="@color/grey_primary"
             android:orientation="vertical">
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/add_conv_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_username"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:singleLine="true" />
 
-            <EditText
-                android:id="@+id/add_conv_username"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/prompt_username"
-                android:imeOptions="actionUnspecified"
-                android:inputType="text"
-                android:maxLines="1"
-                android:singleLine="true" />
-
-        </android.support.design.widget.TextInputLayout>
+                <EditText
+                    android:id="@+id/add_conv_convName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:hint="@string/prompt_convName"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:singleLine="true" />
 
                 <Button
                     android:id="@+id/bt_add_conv"
