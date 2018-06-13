@@ -23,7 +23,8 @@ import com.android.volley.toolbox.Volley;
 import java.util.HashMap;
 import java.util.Map;
 
-public class addConvFragment extends Fragment {
+public class addConvFragment extends Fragment
+{
     private EditText mUsernameView;
 
     public addConvFragment(){

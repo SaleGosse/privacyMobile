@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity
 
         this.mUserID = sharedPref.getInt(getString(R.string.user_id_key), -1);
         this.mCookie = sharedPref.getString(getString(R.string.cookie_key), "null");
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
