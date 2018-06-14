@@ -38,14 +38,40 @@
 			$fromID = $request->fetch();
 			$fromID = $fromID['idUser'];
 
+			//Accepting the invitation
 			if($action == "accept")
 			{
-				$rq_update_invit = "UPDATE Invitation SET isOK = 1 WHERE idInvitation = :invitationID";
-				$request = $db->prepare($rq_update_invit);
+				if(isset($_POST["modulus"]) && isset($_POST["exponent"]))
+				{
+					$modulus = $_POST["modulus"];
+					$exponent = $_POST["exponent"];
 
-				$request->bindParam(":invitationID", $invitationID, PDO::PARAM_INT);
-				
-				$request->execute();
+					//Setting isOK to 1
+					$rq_update_invit = "UPDATE Invitation SET isOK = 1 WHERE idInvitation = :invitationID";
+					$request = $db->prepare($rq_update_invit);
+
+					$request->bindParam(":invitationID", $invitationID, PDO::PARAM_INT);
+					
+					$request->execute();
+
+					//Inserting our rsa key in linkConversation
+					$rq_insert_modulus = "UPDATE linkConversation SET (pubExp = :exponent, modulus = :modulus) WHERE idUser = :userID AND idConversation = :conversationID";
+					$request = $db->prepare($rq_insert_modulus);
+
+					$request->bindParam(":exponent", $exponent, PDO::PARAM_STR);
+					$request->bindParam(":modulus", $modulus, PDO::PARAM_STR);
+					$request->bindParam(":userID", $userID, PDO::PARAM_INT);
+					$request->bindParam(":conversationID", $conversationID, PDO::PARAM_INT);
+
+					$request->execute();
+				}
+				else 
+				{
+					echo "false\n" . "error: Missing POST parameters.\n";
+
+					$db = null;
+					exit();
+				}
 			}
 			else if ($action == "decline")
 			{

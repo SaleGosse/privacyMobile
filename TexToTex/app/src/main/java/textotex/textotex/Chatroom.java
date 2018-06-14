@@ -40,12 +40,16 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.interfaces.RSAPublicKey;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.ExecutionException;
 
@@ -499,37 +503,74 @@ public class Chatroom extends AppCompatActivity {
 
     private void acceptInvitation(final int invitationID)
     {
-        SecureClass sClass = new SecureClass(this, this.getSharedPreferences(getString(R.string.preference_file), Context.MODE_PRIVATE));
-        sClass.newRSAKey(conversationID);
+        final SecureClass sClass = new SecureClass(this, this.getSharedPreferences(getString(R.string.preference_file), Context.MODE_PRIVATE));
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, getString(R.string.url_base) + getString(R.string.url_respond_invit),
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
+        try
+        {
+             final KeyPair kp = KeyPairGenerator.getInstance("RSA").generateKeyPair();
 
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                     }
-                }){
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
+             StringRequest stringRequest = new StringRequest(Request.Method.POST, getString(R.string.url_base) + getString(R.string.url_respond_invit),
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Scanner reader = new Scanner(response);
+                            Boolean success = false;
+                            String error_txt = "Internal error.";
 
-                params.put("cookie", cookie);
-                params.put("userID", Integer.toString(userID));
-                params.put("invitationID", Integer.toString(invitationID));
-                params.put("action:", "accept");
+                            while (reader.hasNextLine())
+                            {
+                                String line = reader.nextLine();
 
-                return params;
-            }
-        };
+                                if(line.contains("true"))
+                                    continue;
+                                else if(line.contains("false"))
+                                    success = false;
+                                else if(line.contains("error: "))
+                                {
+                                    success = false;
+                                    error_txt = line.substring(line.indexOf("error: ") + "error: ".length());
+                                }
+                            }
 
-        RequestQueue queue = Volley.newRequestQueue(Chatroom.this);
+                            if(!success)
+                                Toast.makeText(Chatroom.this, error_txt, Toast.LENGTH_LONG).show();
+                            else
+                            {
+                                Toast.makeText(Chatroom.this, "Success...", Toast.LENGTH_LONG).show();
+                                sClass.insertKeys(conversationID, kp, Integer.toString(new Random().nextInt()));
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                        }
+                    }){
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<String, String>();
 
-        queue.add(stringRequest);
+                    params.put("cookie", cookie);
+                    params.put("userID", Integer.toString(userID));
+                    params.put("invitationID", Integer.toString(invitationID));
+                    params.put("modulus", ((RSAPublicKey)kp.getPublic()).getModulus().toString());
+                    params.put("exponent", ((RSAPublicKey)kp.getPublic()).getPublicExponent().toString());
+                    params.put("action:", "accept");
+
+                    return params;
+                }
+            };
+
+            RequestQueue queue = Volley.newRequestQueue(Chatroom.this);
+
+            queue.add(stringRequest);
+        }
+        catch (Exception e)
+        {
+
+        }
+
+
     }
 
     private void declineInvitation(final int invitationID)

@@ -1,12 +1,20 @@
 package textotex.textotex;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.android.volley.toolbox.StringRequest;
+
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
+import java.security.MessageDigest;
+import java.security.interfaces.RSAPrivateKey;
+import java.security.interfaces.RSAPublicKey;
+import java.util.Random;
 
 public class SecureClass extends SQLiteOpenHelper {
 
@@ -14,24 +22,23 @@ public class SecureClass extends SQLiteOpenHelper {
     private static SharedPreferences mSharedPref;
     private final int mUserID;
     public static final String  DATABASE_NAME = "hashDB";
-    public static final int     DATABASE_VERSION = 5;
+    public static final int     DATABASE_VERSION = 1;
 
 
     public SecureClass(Context context, SharedPreferences sharedPref) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+
         this.mSharedPref = sharedPref;
         this.mUserID = this.mSharedPref.getInt(context.getString(R.string.user_id_key), -1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        final String rq1 = "CREATE TABLE IF NOT EXISTS PublicKeys(idPubKey INTEGER NOT NULL AUTOINCREMENT, idUser INTEGER NOT NULL, pub_key TEXT);";
-        final String rq2 = "CREATE TABLE IF NOT EXISTS AESKeys (idAESKey INTEGER NOT NULL AUTOINCREMENT, idConversation INTEGER NOT NULL, private_key TEXT, aes_key TEXT NOT NULL);";
+        final String rq1 = "CREATE TABLE IF NOT EXISTS PublicKeys(idPubKey INTEGER PRIMARY KEY AUTOINCREMENT, idUser INTEGER NOT NULL, pubExp TEXT, modulus TEXT);";
+        final String rq2 = "CREATE TABLE IF NOT EXISTS AESKeys (idAESKey INTEGER PRIMARY KEY AUTOINCREMENT, idConversation INTEGER NOT NULL, privExp TEXT, aesKey TEXT NOT NULL);";
 
-        database = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
-
-        database.execSQL(rq1);
-        database.execSQL(rq2);
+        db.execSQL(rq1);
+        db.execSQL(rq2);
     }
 
     @Override
@@ -45,27 +52,75 @@ public class SecureClass extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void newRSAKey(int conversationID) {
+    public KeyPair newRSAKey(int conversationID) {
+        KeyPair kp = new KeyPair(null, null);
 
         try {
             final KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
-            KeyPair kp = generator.generateKeyPair();
-
-            this.insertKeys(conversationID, kp);
+            kp = generator.generateKeyPair();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        int rand = new Random().nextInt();
+
+        this.insertKeys(conversationID, kp, Integer.toString(rand));
+
+        return kp;
     }
 
-    public void insertKeys(int conversationID, KeyPair kp)
+    public void insertKeys(int conversationID, KeyPair kp, String aeskey)
     {
-        String rq_insert_public = "INSERT INTO PublicKeys (idUser, pub_key) VALUES (" + Integer.toString(this.mUserID) + ", " + kp.getPublic() + ")";
-        String rq_insert_private = "INSERT INTO AESKeys (idConversation, priv_key) VALUES (" + Integer.toString(conversationID) + kp.getPrivate() + ")";
+        SQLiteDatabase db = this.getWritableDatabase();
 
-        database.execSQL(rq_insert_public);
-        database.execSQL(rq_insert_private);
+        //The public idUser/exponent/modulus
+        ContentValues val = new ContentValues();
 
+        val.put("idUser", this.mUserID);
+        val.put("pubExp", ((RSAPublicKey)kp.getPublic()).getPublicExponent().toString());
+        val.put("modulus", ((RSAPublicKey)kp.getPublic()).getModulus().toString());
+
+        db.insert("PublicKeys", null, val);
+
+        //The private idConversation/exponent/AESKey
+
+        val = new ContentValues();
+
+        val.put("idConversation", conversationID);
+        val.put("privExp", ((RSAPrivateKey)kp.getPrivate()).getModulus().toString());
+        val.put("aesKey", getHash(Integer.toString(new Random().nextInt())));
+
+        db.insert("AESKeys", null, val);
     }
+
+    public String getAESKey(int conversationID)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT aesKey FROM AESKeys WHERE idConversation = " + Integer.toString(conversationID), null);
+
+        cursor.moveToFirst();
+
+        return cursor.getString(0);
+    }
+
+    public String getHash(String str)
+    {
+        MessageDigest digest = null;
+
+        try
+        {
+            digest = MessageDigest.getInstance("SHA-256");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return "error";
+        }
+
+        digest.reset();
+        return digest.digest(str.getBytes()).toString();
+    }
+
 }
 
 

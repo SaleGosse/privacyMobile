@@ -28,6 +28,7 @@ import java.security.KeyPairGenerator;
 import java.security.interfaces.RSAPublicKey;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 
 public class addConvFragment extends Fragment
@@ -102,7 +103,8 @@ public class addConvFragment extends Fragment
                                         conversationID = Integer.parseInt(line.substring(line.indexOf("convID: ") + "convID: ".length()));
                                 }
 
-                                ((MainActivity)getActivity()).mSClass.insertKeys(conversationID, kp);
+                                SecureClass sClass = new SecureClass(getContext(), sharedPref);
+                                sClass.insertKeys(conversationID, kp, String.valueOf(new Random().nextInt()));
 
                                 getActivity().finish();
 

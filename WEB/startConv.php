@@ -79,13 +79,12 @@
 			$lastDate = date('d/m/Y H:i', time());
 
 			//Creating the conversation
-			$rq_insert_conv = "INSERT INTO Conversation (convName, creationDate, lastDate, exponent) VALUES (:convName, :creationDate, :lastDate, :exponent)";
+			$rq_insert_conv = "INSERT INTO Conversation (convName, creationDate, lastDate) VALUES (:convName, :creationDate, :lastDate)";
 
 			$request = $dataB->prepare($rq_insert_conv);
 			$request->bindParam(":convName", $convName, PDO::PARAM_STR);
 			$request->bindParam(":creationDate", $creationDate, PDO::PARAM_STR);
 			$request->bindParam(":lastDate", $lastDate, PDO::PARAM_STR);
-			$request->bindParam(":exponent", $exponent, PDO::PARAM_STR);
 
 			$request->execute();
 
@@ -104,7 +103,7 @@
 			$convID = $convID['idConversation'];
 
 			//Adding the links for this conversation
-			$rq_insert_link = "INSERT INTO linkConversation (idUser, idConversation, modulus) VALUES (:userID, :conversationID, :modulus)";
+			$rq_insert_link = "INSERT INTO linkConversation (idUser, idConversation, pubExp, modulus) VALUES (:userID, :conversationID, :exponent, :modulus)";
 
 			//Creating the request, we'll use it twice
 			$request = $dataB->prepare($rq_insert_link);
@@ -112,12 +111,14 @@
 			
 			//For us
 			$request->bindParam(":userID", $userID, PDO::PARAM_INT);
+			$request->bindParam(":exponent", $exponent, PDO::PARAM_STR);
 			$request->bindParam(":modulus", $modulus, PDO::PARAM_STR);
 			$request->execute();
 
 			//For the target
-			$modulus = "";
+			$exponent = $modulus = "";
 			$request->bindParam(":userID", $targetID, PDO::PARAM_INT);
+			$request->bindParam(":exponent", $exponent, PDO::PARAM_STR);
 			$request->bindParam(":modulus", $modulus, PDO::PARAM_STR);
 			$request->execute();
 
