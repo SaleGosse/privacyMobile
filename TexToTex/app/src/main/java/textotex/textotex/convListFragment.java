@@ -1,8 +1,11 @@
 package textotex.textotex;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,6 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -39,12 +44,28 @@ public class convListFragment extends ListFragment {
 
     List<convListData> listData;
     ListView mListView;
+    Dialog myDialog;
+    public Dialog myDialogBis;
+    public TextView txtclose;
+    public Button btnFollow;
+    public Button search ;
+    public int  userID ;
+    public TextView nbConversation;
+    public TextView nbFollowers;
+    public TextView nbMessage;
+    public TextView displayUserName;
+    public EditText inputSearch;
+    public String mCookie;
+    public String mUsernameReach;
+    public String mUsername;
+    public SharedPreferences sharedPref;
+    public boolean isNameExiste;
+    public Dialog myDialogError;
+    public boolean isAddNewFriend;
 
-    private int mUserID;
-    private String mCookie;
-
-    public convListFragment(int userID, String cookie) {
-        this.mUserID = userID;
+    public convListFragment(int userID, String cookie)
+    {
+        this.userID = userID;
         this.mCookie = cookie;
     }
 
@@ -54,12 +75,91 @@ public class convListFragment extends ListFragment {
 
         listData = new ArrayList<>();
         mListView = (ListView)v.findViewById(android.R.id.list);
-
+        myDialog = new Dialog(getContext());
         FloatingActionButton fab = (FloatingActionButton) v.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
+        sharedPref = getActivity().getSharedPreferences(getString(R.string.preference_file), Context.MODE_PRIVATE);
+
+        userID = sharedPref.getInt(getString(R.string.user_id_key), -1);
+        mCookie = sharedPref.getString(getString(R.string.cookie_key), "null");
+        mUsername = sharedPref.getString(getString(R.string.login_key), "null");
+
+        fab.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+
+                    myDialog.setContentView(R.layout.search_pop_up);
+                    txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
+                     txtclose.setText("X");
+                    search  = (Button) myDialog.findViewById(R.id.btnsearch);
+                inputSearch = myDialog.findViewById(R.id.serachEdit);
+                    txtclose.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            myDialog.dismiss();
+                        }
+                    });
+
+                search.setOnClickListener( new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v) {
+                        mUsernameReach = inputSearch.getText().toString();
+                        myDialog.dismiss();
+                        myDialogBis = new Dialog(getContext());
+                        myDialogBis.setContentView(R.layout.popup);
+                        TextView txtclose =(TextView) myDialogBis.findViewById(R.id.txtclose);
+                        txtclose.setText("X");
+                        btnFollow = myDialogBis.findViewById(R.id.btnfollow);
+                        displayUserName = myDialogBis.findViewById(R.id.nameSearch);
+                        nbFollowers =  myDialogBis.findViewById(R.id.nbFollowers);
+                        nbConversation =  myDialogBis.findViewById(R.id.nbChat);
+                        nbMessage = myDialogBis.findViewById(R.id.nbMessage);
+
+                        txtclose.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                myDialogBis.dismiss();
+                            }
+                        });
+
+                        btnFollow.setOnClickListener(new View.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(View v)
+                            {
+                                createFriends();
+                                myDialogBis.dismiss();
+                                if(isAddNewFriend)
+                                {
+                                    Toast.makeText(getActivity(),  mUsernameReach + "is your friend now" , Toast.LENGTH_LONG).show();
+                                }
+                                else
+                                {
+                                    Toast.makeText(getActivity(), "OOPs! Something went wrong with "+ mUsernameReach +".", Toast.LENGTH_LONG).show();
+
+                                }
+                            }
+                        });
+                        if(mUsernameReach.isEmpty())
+                        {
+                            error(myDialog);
+                        }
+                        else {
+                            getAndReachFriends();
+                            if (isNameExiste) {
+                                myDialogBis.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                myDialogBis.show();
+                            } else {
+                                error(myDialogBis);
+                            }
+                        }
+
+                    }
+                });
+                    myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    myDialog.show();
             }
         });
 
@@ -71,8 +171,6 @@ public class convListFragment extends ListFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-
 
     }
 
@@ -125,7 +223,7 @@ public class convListFragment extends ListFragment {
                 Map<String, String> params = new HashMap<String, String>();
 
                 params.put("cookie", convListFragment.this.mCookie);
-                params.put("userID", Integer.toString(convListFragment.this.mUserID));
+                params.put("userID", Integer.toString(convListFragment.this.userID));
 
                 return params;
             }
@@ -137,8 +235,6 @@ public class convListFragment extends ListFragment {
         //adding the string request to request queue
         requestQueue.add(stringRequest);
     }
-
-
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
@@ -153,5 +249,140 @@ public class convListFragment extends ListFragment {
         intent.putExtra("conversationName", conversationName);
 
         startActivity(intent);
+    }
+
+    public void loadPopUpFriend()
+    {
+
+        getAndReachFriends();
+    }
+
+    public void error(Dialog dial)
+    {
+        dial.dismiss();
+        if (myDialogError != null)
+        {
+            myDialogError.dismiss();
+            myDialogError = null;
+        }
+        myDialogError = new Dialog(getContext());
+        myDialogError.setContentView(R.layout.search_error);
+        TextView txtcloseE =(TextView) myDialogError.findViewById(R.id.txtclose);
+
+        txtcloseE.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDialogError.dismiss();
+            }
+        });
+        myDialogError.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialogError.show();
+        isNameExiste = false;
+    }
+
+    public void getAndReachFriends()
+    {
+
+        final RequestQueue mQueue = Volley.newRequestQueue(getContext());
+
+        mQueue.addRequestFinishedListener(new RequestQueue.RequestFinishedListener<Object>() {
+            @Override
+            public void onRequestFinished(Request<Object> request) {
+            }
+        });
+
+        //The request..
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, getString(R.string.url_base) + getString(R.string.url_getInfoUser),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try
+                        {
+                            if (response.contains("false"))
+                            {
+                                isNameExiste = false;
+                                return;
+                            }
+                            else
+                                {
+                                    //so here we are getting that json array
+                                    JSONArray dataArray = new JSONArray(response);
+                                    JSONObject dataObject ;//= new JSONObject(response);
+                                    //getting the json object of the particular index inside the array
+                                    dataObject = dataArray.getJSONObject(0);
+                                    displayUserName.setText(mUsernameReach);
+                                    nbConversation.setText(dataObject.getString("NbConversation"));
+                                    nbFollowers.setText(dataObject.getString("Friends"));
+                                    nbMessage.setText(dataObject.getString("NbMessage"));
+                                    isNameExiste = true;
+                                }
+                        }
+                        catch (JSONException e) {
+                            e.printStackTrace();
+                            isNameExiste = false;
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //put connection problem or smth
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("friendName", mUsernameReach);
+                params.put("cookie", mCookie);
+                return params;
+            }
+
+        };
+        mQueue.add(stringRequest);
+    }
+
+    public void createFriends()
+    {
+
+        final RequestQueue mQueue = Volley.newRequestQueue(getContext());
+
+        mQueue.addRequestFinishedListener(new RequestQueue.RequestFinishedListener<Object>() {
+            @Override
+            public void onRequestFinished(Request<Object> request) {
+            }
+        });
+
+        //The request..
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, getString(R.string.url_base) + getString(R.string.url_addFriend),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if(response.contains("true"))
+                        {
+                            isAddNewFriend = true;
+                        }
+                        else
+                        {
+                            isAddNewFriend = false;
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //put connection problem or smth
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("friendName", mUsernameReach);
+                params.put("cookie", mCookie);
+                params.put("idUser", String.valueOf(userID));
+                return params;
+            }
+
+        };
+        mQueue.add(stringRequest);
     }
 }
