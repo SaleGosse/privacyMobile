@@ -28,7 +28,7 @@
 			$conversationID = $_POST['conversationID'];
 
 			//Check if it's an invitation
-			$rq_check_invit = "SELECT i.idInvitation,p.firstName,p.lastName,u.login FROM Invitation i LEFT JOIN Profile p ON p.idUser = i.idUser JOIN User u ON p.idUser = u.idUser WHERE i.idTarget = :userID AND i.idConversation = :conversationID AND isOK = 0";
+			$rq_check_invit = "SELECT i.idInvitation,p.firstName,p.lastName,u.login FROM Invitation i LEFT JOIN Profile p ON p.idUser = i.idUser JOIN User u ON p.idUser = u.idUser WHERE i.idUser = :userID AND i.idConversation = :conversationID AND isOK = 0";
 			$request = $dataBase->prepare($rq_check_invit);
 			$request->bindParam(":userID", $userID, PDO::PARAM_INT);
 			$request->bindParam(":conversationID", $conversationID, PDO::PARAM_INT);
@@ -50,9 +50,9 @@
 			}
 
 			//Else, get the messages
-			$rq_get_msg = "SELECT m.idUser,lastName,firstName,m.content,m.date,m.idMessage FROM Message m Left JOIN (SELECT idUser FROM linkConversation WHERE idConversation = :idConversation ) c ON m.idUser = c.idUSer JOIN Profile p  ON m.idUser = p.idUser WHERE idConversation = :idConversation ORDER BY m.date ASC";
+			$rq_get_msg = "SELECT m.idMessage,m.idUser,p.lastName,p.firstName,m.content,m.date FROM Message m Left JOIN (SELECT idUser FROM linkConversation WHERE idConversation = :idConversation) c ON m.idUser = c.idUSer JOIN Profile p  ON m.idUser = p.idUser WHERE idConversation = :idConversation ORDER BY m.date ASC";
 			$resultConv = $dataBase->prepare($rq_get_msg);
-			$resultConv->bindParam(':idConversation', $idConversation, PDO::PARAM_INT);
+			$resultConv->bindParam(':idConversation', $conversationID, PDO::PARAM_INT);
 			$resultConv->execute();
 			$resultMessage = $resultConv->fetchAll(PDO::FETCH_ASSOC);
 

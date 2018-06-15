@@ -33,10 +33,10 @@
 			$request->bindParam(':idUserSource', $idUserSource, PDO::PARAM_INT);
 			$request->bindParam(':idFriend', $idFriend, PDO::PARAM_INT);
 			$request->execute();
+			
+			echo "true";
+			$db = null;   // Disconnect
 		}
-		
-		echo "true";
-		$db = null;   // Disconnect
 	}
 	else 
 	{

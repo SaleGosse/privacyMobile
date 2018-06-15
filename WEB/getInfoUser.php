@@ -5,7 +5,7 @@
 	if(isset($_POST['cookie']))
 	{	
 
-			if(isset($_POST['idUser']) || isset($_POST['friendName']))
+			if(isset($_POST['idUser']))
 		 	{
 				$dataBase =  connectionDB();
 
@@ -31,26 +31,9 @@
 					//Exiting
 					exit();
 				}
-			
-		 		if(isset($_POST['friendName']))
-		 		{
-		 			$login = (string)$_POST['friendName'];
-					$result = $dataBase->prepare("SELECT idUser FROM User WHERE login = :login");
-					$result->bindParam(':login', $login, PDO::PARAM_STR);
-					$result->execute();
-					$idUser = $result->fetchAll(PDO::FETCH_ASSOC);
-					$a = $idUser[0]['idUser'];
-					$idUser = $a;
-		 		}
-		 		//echo $idUser;
-		 		//exit ;
-		 		else 
-		 		{
-		 			$idUser = (int)$_POST['idUser'];		 			
-		 		}
+		 		$idUser = (int)$_POST['idUser'];		 			
 		 		
-		 	
-		 		$resultConv = $dataBase->prepare("SELECT ( SELECT count(*)  FROM Message WHERE idUser = :idUser) as 'NbMessage' ,(SELECT count(*) FROM linkConversation WHERE idUser = :idUser ) AS 'NbConversation' , (select count(idUser) from (select idConversation from linkConversation where idUser = :idUser ) a JOIN linkConversation p ON a.idConversation = p.idConversation WHERE idUser != :idUser )as Friends ");
+		 		$resultConv = $dataBase->prepare("SELECT ( SELECT count(*)  FROM Message WHERE idUser = :idUser) as 'NbMessage' ,(SELECT count(*) FROM linkConversation WHERE idUser = :idUser ) AS 'NbConversation' , (select count(idUserFriend) from Friend WHERE idUser = :idUser )as 'Friends' ");
 				$resultConv->bindParam(':idUser', $idUser, PDO::PARAM_INT);
 				$resultConv->execute();
 				$array1 = $resultConv->fetchall(PDO::FETCH_OBJ);
