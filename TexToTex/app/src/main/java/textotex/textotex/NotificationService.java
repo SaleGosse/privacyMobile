@@ -224,7 +224,6 @@ public class NotificationService extends Service {
                     for (int i = 0; i < jsonArray.length(); i++)
                     {
                         JSONObject dataObject = jsonArray.getJSONObject(i);
-
                         mDataArray.add(new notificationData(dataObject.getString("convName"), dataObject.getString("firstName"), dataObject.getString("date"), dataObject.getString("content"), mUserID, dataObject.getInt("conversationID")));
                     }
                 }

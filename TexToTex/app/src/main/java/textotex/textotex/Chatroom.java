@@ -321,24 +321,36 @@ public class Chatroom extends AppCompatActivity {
                         return "Internal error.";
                     }
                     else if(line.contains("type: "))
+                    {
                         type = Integer.valueOf(line.substring(line.indexOf("type: ") + "type: ".length()));
-                    else if(line.contains("invitationID: "))
-                        invitationID = Integer.valueOf(line.substring(line.indexOf("invitationID: ") + "invitationID: ".length()));
-                    else if(line.contains("firstName: "))
-                        fromFirstName = line.substring(line.indexOf("firstName: ") + "firstName: ".length());
-                    else if(line.contains("lastName: "))
-                        fromLastName = line.substring(line.indexOf("lastName: ") + "lastName: ".length());
-                    else if(line.contains("login: "))
-                        fromLogin = line.substring(line.indexOf("login: ") + "login: ".length());
+                    }
                     else if(line.contains("error: "))
                     {
                         String error_txt = line.substring(line.indexOf("error: ") + "error: ".length());
                         Toast.makeText(Chatroom.this, error_txt, Toast.LENGTH_LONG).show();
                     }
-                    else
+
+                    if(type == 2)
+                    {
+                        if(line.contains("invitationID: "))
+                            invitationID = Integer.valueOf(line.substring(line.indexOf("invitationID: ") + "invitationID: ".length()));
+                        else if(line.contains("firstName: "))
+                            fromFirstName = line.substring(line.indexOf("firstName: ") + "firstName: ".length());
+                        else if(line.contains("lastName: "))
+                            fromLastName = line.substring(line.indexOf("lastName: ") + "lastName: ".length());
+                        else if(line.contains("login: "))
+                            fromLogin = line.substring(line.indexOf("login: ") + "login: ".length());
+                    }
+                    else {
                         result.append(line + "\n");
+                    }
                 }
+
                 // Pass data to onPostExecute method
+                if(type == 1) {
+                    return result.toString().substring(result.indexOf("[{"));
+                }
+
                 return(result.toString());
 
             }else{

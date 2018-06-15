@@ -41,7 +41,7 @@
     <string name="cookie_key">textotex_cookie</string>
 
     <!-- Strings related to urls -->
-    <string name="url_base">http://10.105.200.54:8000/</string>
+    <string name="url_base">http://10.105.249.0:8000/</string>
 
     <string name="url_login" translatable="false">login.php</string>
     <string name="url_check_cookie" translatable="false">api_check_cookie.php</string>
@@ -57,4 +57,7 @@
     <string name="url_addFriend" translatable="false" >api_addFriend.php</string>
     <string name="url_respond_invit" translatable="false">api_respond_invitation.php</string>
 
+
+
+    <string name="url_getSearch" translatable="false">api_searchUser.php</string>
 </resources>

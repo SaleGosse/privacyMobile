@@ -82,7 +82,8 @@ public class cookieManager {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        if(response.contains("true")){
+                        if(response.contains("true"))
+                        {
                             mEditor.putBoolean(mActivity.getString(R.string.is_logged_key), true);
                             mEditor.commit();
                         }

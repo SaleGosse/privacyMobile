@@ -14,6 +14,7 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -46,6 +47,7 @@ public class convListFragment extends ListFragment {
     ListView mListView;
     Dialog myDialog;
     public Dialog myDialogBis;
+    public Dialog myDialogBisBis;
     public TextView txtclose;
     public Button btnFollow;
     public Button search ;
@@ -63,8 +65,7 @@ public class convListFragment extends ListFragment {
     public Dialog myDialogError;
     public boolean isAddNewFriend;
 
-    public convListFragment(int userID, String cookie)
-    {
+    public convListFragment(int userID, String cookie) {
         this.userID = userID;
         this.mCookie = cookie;
     }
@@ -84,6 +85,8 @@ public class convListFragment extends ListFragment {
         mCookie = sharedPref.getString(getString(R.string.cookie_key), "null");
         mUsername = sharedPref.getString(getString(R.string.login_key), "null");
 
+        isAddNewFriend = true;
+        isNameExiste = true;
         fab.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -109,13 +112,9 @@ public class convListFragment extends ListFragment {
                         myDialog.dismiss();
                         myDialogBis = new Dialog(getContext());
                         myDialogBis.setContentView(R.layout.popup);
+                        btnFollow = myDialogBis.findViewById(R.id.btnfollow);
                         TextView txtclose =(TextView) myDialogBis.findViewById(R.id.txtclose);
                         txtclose.setText("X");
-                        btnFollow = myDialogBis.findViewById(R.id.btnfollow);
-                        displayUserName = myDialogBis.findViewById(R.id.nameSearch);
-                        nbFollowers =  myDialogBis.findViewById(R.id.nbFollowers);
-                        nbConversation =  myDialogBis.findViewById(R.id.nbChat);
-                        nbMessage = myDialogBis.findViewById(R.id.nbMessage);
 
                         txtclose.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -133,11 +132,11 @@ public class convListFragment extends ListFragment {
                                 myDialogBis.dismiss();
                                 if(isAddNewFriend)
                                 {
-                                    Toast.makeText(getActivity(),  mUsernameReach + "is your friend now" , Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getActivity(),  mUsernameReach + " is your friend now" , Toast.LENGTH_LONG).show();
                                 }
                                 else
                                 {
-                                    Toast.makeText(getActivity(), "OOPs! Something went wrong with "+ mUsernameReach +".", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getActivity(), "OOPs! Something went wrong with  "+ mUsernameReach +".", Toast.LENGTH_LONG).show();
 
                                 }
                             }
@@ -147,12 +146,22 @@ public class convListFragment extends ListFragment {
                             error(myDialog);
                         }
                         else {
-                            getAndReachFriends();
+                            getAndReachFriends(myDialogBis );
                             if (isNameExiste) {
-                                myDialogBis.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                                myDialogBis.show();
-                            } else {
-                                error(myDialogBis);
+                                    displayUserName = myDialogBis.findViewById(R.id.nameSearch);
+                                    nbFollowers =  myDialogBis.findViewById(R.id.nbFollowers);
+                                    nbConversation =  myDialogBis.findViewById(R.id.nbChat);
+                                    nbMessage = myDialogBis.findViewById(R.id.nbMessage);
+                                    myDialogBis.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                    myDialogBis.show();
+
+                            } else if (isNameExiste == false) {
+
+                               if(myDialogBis != null)
+                                {
+                                    error(myDialogBis);
+                                }
+
                             }
                         }
 
@@ -251,14 +260,7 @@ public class convListFragment extends ListFragment {
         startActivity(intent);
     }
 
-    public void loadPopUpFriend()
-    {
-
-        getAndReachFriends();
-    }
-
-    public void error(Dialog dial)
-    {
+    public void error(Dialog dial) {
         dial.dismiss();
         if (myDialogError != null)
         {
@@ -280,8 +282,7 @@ public class convListFragment extends ListFragment {
         isNameExiste = false;
     }
 
-    public void getAndReachFriends()
-    {
+    public void getAndReachFriends(final Dialog mysdialog) {
 
         final RequestQueue mQueue = Volley.newRequestQueue(getContext());
 
@@ -292,7 +293,7 @@ public class convListFragment extends ListFragment {
         });
 
         //The request..
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, getString(R.string.url_base) + getString(R.string.url_getInfoUser),
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, getString(R.string.url_base) + getString(R.string.url_getSearch),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -315,6 +316,7 @@ public class convListFragment extends ListFragment {
                                     nbFollowers.setText(dataObject.getString("Friends"));
                                     nbMessage.setText(dataObject.getString("NbMessage"));
                                     isNameExiste = true;
+                                    return;
                                 }
                         }
                         catch (JSONException e) {
@@ -334,6 +336,7 @@ public class convListFragment extends ListFragment {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("friendName", mUsernameReach);
                 params.put("cookie", mCookie);
+                params.put("idUser", String.valueOf(userID));
                 return params;
             }
 
@@ -341,8 +344,7 @@ public class convListFragment extends ListFragment {
         mQueue.add(stringRequest);
     }
 
-    public void createFriends()
-    {
+    public void createFriends() {
 
         final RequestQueue mQueue = Volley.newRequestQueue(getContext());
 
