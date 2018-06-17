@@ -17,6 +17,10 @@
             android:icon="@mipmap/ic_add_team_conv_foreground"
             android:title="New Team Conversation" />
         <item
+            android:id="@+id/nav_friend"
+            android:icon="@mipmap/ic_add_team_conv_foreground"
+            android:title="Friends" />
+        <item
             android:id="@+id/nav_about"
             android:icon="@mipmap/ic_about_foreground"
             android:title="About" />

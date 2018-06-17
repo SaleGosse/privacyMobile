@@ -36,7 +36,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class convListFragment extends ListFragment {
+public class friendListFragment extends ListFragment {
 
     List<convListData> listData;
     ListView mListView;
@@ -59,11 +59,16 @@ public class convListFragment extends ListFragment {
     public Dialog myDialogError;
     public boolean isAddNewFriend;
 
+    List<friendListData> listDataTest;
+    Dialog myDialognbBtn;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle onSavedInstanceState) {
-        View v = inflater.inflate(R.layout.conv_list_fragment, container, false);
+        View v = inflater.inflate(R.layout.friend_list_fragement, container, false);
 
         listData = new ArrayList<>();
+        listDataTest = new ArrayList<>();
         mListView = (ListView)v.findViewById(android.R.id.list);
 
         FloatingActionButton fab = (FloatingActionButton) v.findViewById(R.id.fab);
@@ -81,18 +86,18 @@ public class convListFragment extends ListFragment {
             @Override
             public void onClick(View v) {
                 myDialog = new Dialog(getContext());
-                    myDialog.setContentView(R.layout.search_pop_up);
-                    txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
-                     txtclose.setText("X");
-                    search  = (Button) myDialog.findViewById(R.id.btnsearch);
+                myDialog.setContentView(R.layout.search_pop_up);
+                txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
+                txtclose.setText("X");
+                search  = (Button) myDialog.findViewById(R.id.btnsearch);
                 inputSearch = myDialog.findViewById(R.id.serachEdit);
-                    txtclose.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            myDialog.dismiss();
-                            myDialog = null;
-                        }
-                    });
+                txtclose.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        myDialog.dismiss();
+                        myDialog = null;
+                    }
+                });
                 search.setOnClickListener( new View.OnClickListener()
                 {
                     @Override
@@ -141,16 +146,16 @@ public class convListFragment extends ListFragment {
                             getAndReachFriends(myDialogBis);
                             if (isNameExiste)
                             {
-                                    displayUserName = myDialogBis.findViewById(R.id.nameSearch);
-                                    nbFollowers =  myDialogBis.findViewById(R.id.nbFollowers);
-                                    nbConversation =  myDialogBis.findViewById(R.id.nbChat);
-                                    nbMessage = myDialogBis.findViewById(R.id.nbMessage);
-                                    myDialogBis.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                                    myDialogBis.show();
+                                displayUserName = myDialogBis.findViewById(R.id.nameSearch);
+                                nbFollowers =  myDialogBis.findViewById(R.id.nbFollowers);
+                                nbConversation =  myDialogBis.findViewById(R.id.nbChat);
+                                nbMessage = myDialogBis.findViewById(R.id.nbMessage);
+                                myDialogBis.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                myDialogBis.show();
 
                             } else if (isNameExiste == false) {
 
-                               if(myDialogBis != null)
+                                if(myDialogBis != null)
                                 {
                                     error(myDialogBis);
                                     myDialogBis = null;
@@ -165,11 +170,13 @@ public class convListFragment extends ListFragment {
 
                     }
                 });
-                    myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                    myDialog.show();
+                myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                myDialog.show();
             }
         });
+
         this.fetchListData();
+
         return v;
     }
 
@@ -183,12 +190,13 @@ public class convListFragment extends ListFragment {
         //making the progressbar visible
         //progressBar.setVisibility(View.VISIBLE);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, getString(R.string.url_base) + getString(R.string.url_conv_list),
+        //StringRequest stringRequest = new StringRequest(Request.Method.POST, getString(R.string.url_base) + getString(R.string.url_conv_list),
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, getString(R.string.url_base) + getString(R.string.url_listFriend),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
-                             //we have the array named hero inside the object
+                            //we have the array named hero inside the object
                             //so here we are getting that json array
                             JSONArray dataArray = new JSONArray(response);
 
@@ -198,13 +206,15 @@ public class convListFragment extends ListFragment {
                                 JSONObject dataObject = dataArray.getJSONObject(i);
 
                                 //creating a hero object and giving them the values from json object
-                                convListData data = new convListData(Integer.parseInt(dataObject.getString("idConversation")), dataObject.getString("name"), dataObject.getString("content"), dataObject.getString("date"), dataObject.getBoolean("unread"));
-                                // adding the data to the datalist
-                                listData.add(data);
+                                // convListData data = new convListData(Integer.parseInt(dataObject.getString("idConversation")), dataObject.getString("name"), dataObject.getString("content"), dataObject.getString("date"), dataObject.getBoolean("unread"));
+                                friendListData data = new friendListData(Integer.parseInt(dataObject.getString("idUserFriend")),dataObject.getString("login"));
+                                //adding the data to the datalist
+                                //listData.add(data);
+                                listDataTest.add(data);
                             }
 
                             //creating custom adapter object
-                            convListAdapter adapter = new convListAdapter(getContext(), listData);
+                            friendListAdapter adapter = new friendListAdapter(getContext(), listDataTest);
 
                             //adding the adapter to listview
                             setListAdapter(adapter);
@@ -225,8 +235,8 @@ public class convListFragment extends ListFragment {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
 
-                params.put("cookie", convListFragment.this.mCookie);
-                params.put("userID", Integer.toString(convListFragment.this.userID));
+                params.put("cookie", friendListFragment.this.mCookie);
+                params.put("idUser", Integer.toString(friendListFragment.this.userID));
 
                 return params;
             }
@@ -241,17 +251,28 @@ public class convListFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        int conversationID = listData.get(position).getConversationID();
-        String conversationName = listData.get(position).getConversationName();
+        // int conversationID = listData.get(position).getConversationID();
+        String Name = listDataTest.get(position).getConversationUserName();
+        myDialognbBtn = new Dialog(getContext());
+        myDialognbBtn.setContentView(R.layout.popup_nobttn);
+        nbFollowers =  myDialognbBtn.findViewById(R.id.nbFollowers);
+        nbConversation =  myDialognbBtn.findViewById(R.id.nbChat);
+        nbMessage = myDialognbBtn.findViewById(R.id.nbMessage);
+        displayUserName = myDialognbBtn.findViewById(R.id.nameSearch);
+        getFriends(Name);
+        TextView txtcloseBis =(TextView) myDialognbBtn.findViewById(R.id.txtclose);
+        txtcloseBis.setText("X");
 
-        listData.get(position).toggleUnread();
+        txtcloseBis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDialognbBtn.dismiss();
+                myDialognbBtn = null;
+            }
+        });
+        myDialognbBtn.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialognbBtn.show();
 
-        Intent intent = new Intent(getActivity(), Chatroom.class);
-
-        intent.putExtra("conversationID", conversationID);
-        intent.putExtra("conversationName", conversationName);
-
-        startActivity(intent);
     }
 
     public void error(Dialog dial) {
@@ -300,23 +321,23 @@ public class convListFragment extends ListFragment {
                             if (response.contains("false"))
                             {
                                 isNameExiste = false;
-                               // error(mysdialog);
+                                error(mysdialog);
                                 return;
                             }
                             else
-                                {
-                                    //so here we are getting that json array
-                                    JSONArray dataArray = new JSONArray(response);
-                                    JSONObject dataObject ;//= new JSONObject(response);
-                                    //getting the json object of the particular index inside the array
-                                    dataObject = dataArray.getJSONObject(0);
-                                    displayUserName.setText(mUsernameReach);
-                                    nbConversation.setText(dataObject.getString("NbConversation"));
-                                    nbFollowers.setText(dataObject.getString("Friends"));
-                                    nbMessage.setText(dataObject.getString("NbMessage"));
-                                    isNameExiste = true;
-                                    return;
-                                }
+                            {
+                                //so here we are getting that json array
+                                JSONArray dataArray = new JSONArray(response);
+                                JSONObject dataObject ;//= new JSONObject(response);
+                                //getting the json object of the particular index inside the array
+                                dataObject = dataArray.getJSONObject(0);
+                                displayUserName.setText(mUsernameReach);
+                                nbConversation.setText(dataObject.getString("NbConversation"));
+                                nbFollowers.setText(dataObject.getString("Friends"));
+                                nbMessage.setText(dataObject.getString("NbMessage"));
+                                isNameExiste = true;
+                                return;
+                            }
                         }
                         catch (JSONException e) {
                             e.printStackTrace();
@@ -336,6 +357,65 @@ public class convListFragment extends ListFragment {
                 params.put("friendName", mUsernameReach);
                 params.put("cookie", mCookie);
                 params.put("idUser", String.valueOf(userID));
+                return params;
+            }
+
+        };
+        mQueue.add(stringRequest);
+    }
+
+    public void getFriends(final String p_idUser) {
+
+        final RequestQueue mQueue = Volley.newRequestQueue(getContext());
+
+        mQueue.addRequestFinishedListener(new RequestQueue.RequestFinishedListener<Object>() {
+            @Override
+            public void onRequestFinished(Request<Object> request) {
+            }
+        });
+
+        //The request..
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, getString(R.string.url_base) + getString(R.string.url_getInfoUser),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try
+                        {
+                            if (response.contains("false"))
+                            {
+                                return;
+                            }
+                            else
+                            {
+                                //so here we are getting that json array
+                                JSONArray dataArray = new JSONArray(response);
+                                JSONObject dataObject ;//= new JSONObject(response);
+                                //getting the json object of the particular index inside the array
+                                dataObject = dataArray.getJSONObject(0);
+                                displayUserName.setText(p_idUser);
+                                nbConversation.setText(dataObject.getString("NbConversation"));
+                                nbFollowers.setText(dataObject.getString("Friends"));
+                                nbMessage.setText(dataObject.getString("NbMessage"));
+                                return;
+                            }
+                        }
+                        catch (JSONException e) {
+                            e.printStackTrace();
+                            isNameExiste = false;
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //put connection problem or smth
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("cookie", mCookie);
+                params.put("friendName", p_idUser);
                 return params;
             }
 

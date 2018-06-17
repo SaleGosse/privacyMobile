@@ -496,6 +496,10 @@ public class Chatroom extends AppCompatActivity {
     private boolean sendChatMessage() throws ExecutionException, InterruptedException {
         side = true;
         messageNow = chatText.getText().toString();
+        if(messageNow.isEmpty())
+        {
+            return false;
+        }
         AsyncTask toto = new  SendMessageServer().execute();
         Date date = new Date();
         SimpleDateFormat ft = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss");

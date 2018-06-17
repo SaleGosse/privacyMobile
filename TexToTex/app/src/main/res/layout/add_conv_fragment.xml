@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_purple"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:background="@android:color/white"
     tools:context=".MainActivity"
     tools:showIn="@layout/app_bar_main">
 
@@ -14,10 +12,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="30dp"
+            android:layout_gravity="center"
             android:layout_margin="20dp"
-            android:background="@color/grey_primary"
+            android:background="@color/colorPrimaryDark"
             android:orientation="vertical">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="70dp"
+                    android:text="Add Conversation"
+                    android:textSize="22dp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/startblue"/>
                 <EditText
                     android:id="@+id/add_conv_username"
                     android:layout_width="match_parent"
@@ -28,6 +34,7 @@
                     android:imeOptions="actionUnspecified"
                     android:inputType="text"
                     android:maxLines="1"
+                    android:background="@color/white"
                     android:singleLine="true" />
 
                 <EditText
@@ -35,9 +42,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="20dp"
+                    android:layout_marginTop="30dp"
                     android:paddingRight="20dp"
                     android:hint="@string/prompt_convName"
                     android:imeOptions="actionUnspecified"
+                    android:background="@color/white"
                     android:inputType="text"
                     android:maxLines="1"
                     android:singleLine="true" />
@@ -49,6 +58,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/bt_start_conv"
+                    android:background="@drawable/buttonstyle"
                     android:textStyle="bold" />
 
         </LinearLayout>

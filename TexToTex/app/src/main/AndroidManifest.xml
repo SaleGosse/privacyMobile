@@ -34,7 +34,8 @@
             android:name=".SignUpActivity"
             android:label="@string/title_activity_signUp">
         </activity>
-        <activity android:name=".Chatroom" >
+        <activity android:name=".Chatroom"
+            android:label="Chatroom">
         </activity>
 
         <service

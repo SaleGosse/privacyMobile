@@ -11,5 +11,6 @@
         android:layout_height="wrap_content"
         android:text="ADD TEAM"
         tools:layout_editor_absoluteX="98dp"
-        tools:layout_editor_absoluteY="267dp" />
+        tools:layout_editor_absoluteY="267dp"
+        tools:ignore="MissingConstraints" />
 </android.support.constraint.ConstraintLayout>

@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        setCurFragment(new convListFragment(this.mUserID, this.mCookie));
+        setCurFragment(new convListFragment());
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if(id == R.id.bt_home) {
             if(mCurFragment != R.id.nav_conv_list){
-                setCurFragment(new convListFragment(this.mUserID, this.mCookie));
+                setCurFragment(new convListFragment());
                 mCurFragment = R.id.nav_conv_list;
             }
 
@@ -150,6 +150,11 @@ public class MainActivity extends AppCompatActivity
             mCurFragment = id;
         } else if (id == R.id.nav_about && id != mCurFragment) {
             setCurFragment(new aboutFragment());
+
+            mCurFragment = id;
+        }
+        else if (id == R.id.nav_friend && id != mCurFragment) {
+            setCurFragment(new friendListFragment());
 
             mCurFragment = id;
         }
