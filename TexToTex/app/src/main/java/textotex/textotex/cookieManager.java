@@ -127,6 +127,13 @@ public class cookieManager {
 
     public void callLogin() {
         //Creating the new intent
+
+        SharedPreferences.Editor editor = mSharedPref.edit();
+
+        editor.putString(mActivity.getString(R.string.cookie_key), "null");
+
+        editor.apply();
+
         Intent newIntent = new Intent(mActivity, LoginActivity.class);
 
         newIntent.putExtra("login", mSharedPref.getString(mActivity.getString(R.string.login_key), "login"));
