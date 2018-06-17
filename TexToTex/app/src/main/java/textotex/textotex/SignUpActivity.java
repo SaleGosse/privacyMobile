@@ -28,7 +28,8 @@ public class SignUpActivity extends Activity
 {
     public static final int READ_TIMEOUT=1500;
     public static final int CONNECTION_TIMEOUT=1500;
-    private EditText mail;
+    private EditText lastName;
+    private EditText firstName;
     private EditText passwd;
     private EditText passwdBis;
     private EditText userName;
@@ -36,7 +37,8 @@ public class SignUpActivity extends Activity
     public  String passwordS;
     public  String usernameS;
     public  String passwordBisS;
-    public  String mailS;
+    public String lastNameS;
+    public String firstNameS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +47,11 @@ public class SignUpActivity extends Activity
         setContentView(R.layout.activity_signup);
         isAgree  = findViewById(R.id.chkBox1);
         Button buttonSend = findViewById(R.id.btn_signUp);
-        mail = findViewById(R.id.mail);
         passwd = findViewById(R.id.password);
         passwdBis = findViewById(R.id.bisPassword);
         userName = findViewById(R.id.username);
-
+        lastName = findViewById(R.id.lastName);
+        firstName = findViewById(R.id.firstName);
         buttonSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
@@ -67,7 +69,8 @@ public class SignUpActivity extends Activity
         usernameS = userName.getText().toString();
         passwordS = passwd.getText().toString();
         passwordBisS = passwdBis.getText().toString();
-        mailS = mail.getText().toString();
+        lastNameS = lastName.getText().toString();
+        firstNameS = firstName.getText().toString();
 
         if( passwordBisS == null || passwordBisS.isEmpty())
         {
@@ -77,17 +80,19 @@ public class SignUpActivity extends Activity
         {
             return false;
         }
+        if( lastNameS == null || lastNameS.isEmpty())
+        {
+            return false;
+        }
+        if( firstNameS == null || firstNameS.isEmpty())
+        {
+            return false;
+        }
         if( passwordS == null || passwordS.isEmpty())
         {
             return false;
         }
 
-        if( mailS == null || mailS.isEmpty())
-        {
-
-            isAgree.setText("Mail is empty or wrong !");
-            return false;
-        }
         if( !passwordBisS.equals(passwordS))
         {
             isAgree.setText("Wrong password ! Re-type again");
@@ -182,7 +187,8 @@ public class SignUpActivity extends Activity
                 Uri.Builder builder = new Uri.Builder()
                         .appendQueryParameter("username", usernameS)
                         .appendQueryParameter("password",passwordS)
-                        .appendQueryParameter("mail",mailS);
+                        .appendQueryParameter("firstName",firstNameS)
+                        .appendQueryParameter("lastName",lastNameS);
                 String query = builder.build().getEncodedQuery();
 
                 // Open connection for sending data
