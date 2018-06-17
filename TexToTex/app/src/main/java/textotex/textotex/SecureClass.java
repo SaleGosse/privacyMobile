@@ -7,7 +7,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.android.volley.toolbox.StringRequest;
 
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;

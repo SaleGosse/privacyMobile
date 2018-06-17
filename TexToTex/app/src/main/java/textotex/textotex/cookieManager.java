@@ -22,12 +22,12 @@ import java.util.Map;
 
 public class cookieManager {
 
-    final AppCompatActivity mActivity;
+    final Activity mActivity;
     final SharedPreferences mSharedPref;
     final SharedPreferences.Editor mEditor;
     final ProgressDialog pdLoading;
 
-    cookieManager(AppCompatActivity activity) {
+    cookieManager(Activity activity) {
         this.mActivity = activity;
         this.mSharedPref = this.mActivity.getSharedPreferences(this.mActivity.getString(R.string.preference_file), Context.MODE_PRIVATE);
         this.mEditor = this.mSharedPref.edit();
@@ -125,15 +125,15 @@ public class cookieManager {
        queue.add(stringRequest);
     }
 
-    private void callLogin() {
-        //TODO: Finish the calling activity
-        mActivity.finish();
-
+    public void callLogin() {
         //Creating the new intent
         Intent newIntent = new Intent(mActivity, LoginActivity.class);
 
+        newIntent.putExtra("login", mSharedPref.getString(mActivity.getString(R.string.login_key), "login"));
         //Putting info in the bundle
-        newIntent.putExtra("login", mActivity.getString(R.string.login_key));
+
+        //TODO: Finish the calling activity
+        mActivity.finish();
 
         //Starting the new activity
         mActivity.startActivity(newIntent);
