@@ -64,7 +64,8 @@ public class MainActivity extends AppCompatActivity
         navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(this);
 
-        startService(new Intent(this.mContext, NotificationService.class));
+        if(this.mUserID != -1 && this.mCookie != "null")
+            startService(new Intent(this.mContext, NotificationService.class));
     }
 
     private ServiceConnection connectService() {
@@ -171,10 +172,4 @@ public class MainActivity extends AppCompatActivity
 
 }
 
-
-
-/* TODO:
--Notification
-
-*/
 

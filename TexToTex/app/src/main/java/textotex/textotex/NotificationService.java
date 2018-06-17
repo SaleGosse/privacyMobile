@@ -3,6 +3,7 @@ package textotex.textotex;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Binder;
@@ -40,8 +41,10 @@ public class NotificationService extends Service {
     private Timer mTimer = null;
     private Handler mHandler = new Handler();
     private final IBinder mBinder = new LocalBinder();
+    private CheckingTask check;
 
     private int mUserID;
+    private String mCookie;
 
     public List<notificationData> mDataArray;
 
@@ -62,14 +65,18 @@ public class NotificationService extends Service {
     public void onCreate() {
         Log.e("IUOP", "Creating the service..");
 
-        this.mUserID = getSharedPreferences(getString(R.string.preference_file), Context.MODE_PRIVATE).getInt(getString(R.string.user_id_key), -1);
+        SharedPreferences sharedPref = getSharedPreferences(getString(R.string.preference_file), Context.MODE_PRIVATE);
+
+        this.mUserID = sharedPref.getInt(getString(R.string.user_id_key), -1);
+        this.mCookie = sharedPref.getString(getString(R.string.cookie_key), "null");
 
         this.mDataArray = new ArrayList<>();
 
         if(this.mTimer == null)
             this.mTimer = new Timer();
 
-        mTimer.scheduleAtFixedRate(new CheckingTask(), 0, mDeltaTime);
+        this.check = new CheckingTask();
+        mTimer.scheduleAtFixedRate(this.check, 0, mDeltaTime);
     }
 
     @Override
@@ -84,6 +91,7 @@ public class NotificationService extends Service {
     }
 
     private class CheckingTask extends TimerTask {
+
 
         @Override
         public void run() {
@@ -161,7 +169,8 @@ public class NotificationService extends Service {
                 conn.setDoOutput(true);
                 // Append parameters to URL
                 Uri.Builder builder = new Uri.Builder()
-                        .appendQueryParameter("userID", String.valueOf(NotificationService.this.mUserID));
+                        .appendQueryParameter("userID", String.valueOf(NotificationService.this.mUserID))
+                        .appendQueryParameter("cookie", NotificationService.this.mCookie);
                 String query = builder.build().getEncodedQuery();
 
                 // Open connection for sending data
@@ -240,6 +249,10 @@ public class NotificationService extends Service {
             else if(result.contains("error: "))
             {
                 String error_txt = result.substring(result.indexOf("error: ") + "error: ".length());
+                if(error_txt.contains("cookie"))
+                {
+                    return;
+                }
             }
 
 
