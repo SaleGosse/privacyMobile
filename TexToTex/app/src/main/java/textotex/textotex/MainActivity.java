@@ -116,6 +116,12 @@ public class MainActivity extends AppCompatActivity
         else if (id == R.id.action_settings) {
             return true;
         }
+        else if (id == R.id.action_logout)
+        {
+            this.mCM.callLogin();
+
+            return true;
+        }
 
 
         return super.onOptionsItemSelected(item);
@@ -129,7 +135,6 @@ public class MainActivity extends AppCompatActivity
         fragmentTransaction.commit();
     }
 
-   // @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
